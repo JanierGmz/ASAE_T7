@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae_t7.docente.dominio.modelos;
 
+import co.edu.unicauca.asae_t7.curso.dominio.modelos.Curso;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,5 +16,5 @@ import java.util.List;
 public class Docente extends Persona{
     private Oficina objOficina;
 
-    //private List<Curso> cursos = new ArrayList<>();
+    private List<Curso> cursos = new ArrayList<>();
 }
