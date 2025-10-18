@@ -19,7 +19,7 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
     @Override
     public Docente crear(Docente objDocente) {
         Docente objDocenteCreado = null;
-        if(this.objGestionarDocenteGateway.existeDocentePorId(objDocente.getId())){
+        if(objDocente.getId() != null && this.objGestionarDocenteGateway.existeDocentePorId(objDocente.getId())){
             this.objDocenteFormateadorResultados.retornarRespuestaErrorEntidadExiste("Error: Docente ya existe con ese ID.");
         }else {
             if(this.objGestionarDocenteGateway.existeDocentePorCorreo(objDocente.getCorreo())){

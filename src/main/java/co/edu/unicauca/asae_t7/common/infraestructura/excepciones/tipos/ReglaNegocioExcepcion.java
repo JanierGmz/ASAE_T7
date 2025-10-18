@@ -1,8 +1,8 @@
-package co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.excepcionesPropias;
+package co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos;
 
-import co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.estructuraExcepciones.CodigoError;
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.error.CodigoError;
 
-public class ReglaNegocioExcepcion extends GestionClientesRuntimeException {
+public class ReglaNegocioExcepcion extends GestionFranjasRuntimeException {
 
     private static final String FORMATO_EXCEPCION = "%s - Violación a regla de negocio: %s";
 

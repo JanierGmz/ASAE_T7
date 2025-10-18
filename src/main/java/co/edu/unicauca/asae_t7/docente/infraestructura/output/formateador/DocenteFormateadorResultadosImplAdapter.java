@@ -1,8 +1,9 @@
 package co.edu.unicauca.asae_t7.docente.infraestructura.output.formateador;
 
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.EntidadYaExisteException;
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.ReglaNegocioExcepcion;
 import co.edu.unicauca.asae_t7.docente.aplicacion.output.DocenteFormateadorResultadosIntPort;
-import co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadYaExisteException;
-import co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.excepcionesPropias.ReglaNegocioExcepcion;
+
 import org.springframework.stereotype.Service;
 
 @Service

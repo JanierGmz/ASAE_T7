@@ -1,11 +1,5 @@
-package co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones;
+package co.edu.unicauca.asae_t7.common.infraestructura.excepciones;
 
-import co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.estructuraExcepciones.CodigoError;
-import co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.estructuraExcepciones.ErrorUtils;
-import co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadNoExisteException;
-import co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadYaExisteException;
-import co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.excepcionesPropias.ReglaNegocioExcepcion;
-import co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.estructuraExcepciones.Error;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +9,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.validation.ConstraintViolationException;
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.error.CodigoError;
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.error.Error;
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.error.ErrorUtils;
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.EntidadNoExisteException;
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.EntidadYaExisteException;
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.ReglaNegocioExcepcion;
+import jakarta.validation.ConstraintViolationException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -70,7 +70,7 @@ public class RestApiExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex, HttpServletRequest request) {
         System.out.println("Retornando respuesta con los errores identificados");
         Map<String, String> errores = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {

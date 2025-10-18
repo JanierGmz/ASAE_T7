@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class BeanConfigurations {
+public class DocenteBeanConfigurations {
 
     @Bean
     public GestionarDocenteCUAdapter crearGestionarDocenteCUInt(

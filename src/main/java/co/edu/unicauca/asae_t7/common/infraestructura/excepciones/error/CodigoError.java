@@ -1,4 +1,4 @@
-package co.edu.unicauca.asae_t7.docente.infraestructura.output.controladorExcepciones.estructuraExcepciones;
+package co.edu.unicauca.asae_t7.common.infraestructura.excepciones.error;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
