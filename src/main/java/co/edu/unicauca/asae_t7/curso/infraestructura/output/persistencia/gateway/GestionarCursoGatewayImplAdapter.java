@@ -1,0 +1,46 @@
+package co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.gateway;
+
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import co.edu.unicauca.asae_t7.curso.aplicacion.output.GestionarCursoGatewayIntPort;
+import co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.repositorios.CursoRepositoryInt;
+import co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.entidades.CursoEntity;
+import co.edu.unicauca.asae_t7.curso.dominio.modelos.Curso;
+
+@Service
+public class GestionarCursoGatewayImplAdapter implements GestionarCursoGatewayIntPort {
+    private final CursoRepositoryInt objCursoRepository;
+    private final ModelMapper cursoModelMapper;
+
+    public GestionarCursoGatewayImplAdapter(CursoRepositoryInt objCursoRepository, ModelMapper cursoModelMapper) {
+        this.objCursoRepository = objCursoRepository;
+        this.cursoModelMapper = cursoModelMapper;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean existeCursoPorCodigo(String codigo) {
+        return this.objCursoRepository.existeCursoPorCodigo(codigo) == 1;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Curso consultar(Integer codigo) {
+        CursoEntity objCursoEntity = this.objCursoRepository.findById(codigo).orElse(null);
+        Curso objCurso = this.cursoModelMapper.map(objCursoEntity, Curso.class);
+        return objCurso;
+    }
+
+    @Override
+    public List<Curso> listar() {
+        Iterable<CursoEntity> lista = this.objCursoRepository.findAll();
+        List<Curso> listaObtenida = this.cursoModelMapper.map(lista, new TypeToken<List<Curso>>() {
+        }.getType());
+        return listaObtenida;
+    }
+}
