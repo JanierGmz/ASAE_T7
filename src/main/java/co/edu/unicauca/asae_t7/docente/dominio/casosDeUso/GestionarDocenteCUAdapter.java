@@ -1,7 +1,7 @@
 package co.edu.unicauca.asae_t7.docente.dominio.casosDeUso;
 
+import co.edu.unicauca.asae_t7.common.aplicacion.output.FormateadorResultadosIntPort;
 import co.edu.unicauca.asae_t7.docente.aplicacion.input.GestionarDocenteCUIntPort;
-import co.edu.unicauca.asae_t7.docente.aplicacion.output.DocenteFormateadorResultadosIntPort;
 import co.edu.unicauca.asae_t7.docente.aplicacion.output.GestionarDocenteGatewayIntPort;
 import co.edu.unicauca.asae_t7.docente.dominio.modelos.Docente;
 
@@ -9,9 +9,9 @@ public class GestionarDocenteCUAdapter implements GestionarDocenteCUIntPort {
 
     private final GestionarDocenteGatewayIntPort objGestionarDocenteGateway;
 
-    private final DocenteFormateadorResultadosIntPort objDocenteFormateadorResultados;
+    private final FormateadorResultadosIntPort objDocenteFormateadorResultados;
 
-    public GestionarDocenteCUAdapter(GestionarDocenteGatewayIntPort objGestionarDocenteGateway,  DocenteFormateadorResultadosIntPort objDocenteFormateadorResultados) {
+    public GestionarDocenteCUAdapter(GestionarDocenteGatewayIntPort objGestionarDocenteGateway,  FormateadorResultadosIntPort objDocenteFormateadorResultados) {
         this.objGestionarDocenteGateway = objGestionarDocenteGateway;
         this.objDocenteFormateadorResultados = objDocenteFormateadorResultados;
     }

@@ -1,6 +1,8 @@
-package co.edu.unicauca.asae_t7.curso.aplicacion.output;
+package co.edu.unicauca.asae_t7.common.aplicacion.output;
 
-public interface CursoFormateadorResultadosIntPort {
+public interface FormateadorResultadosIntPort {
+
     public void retornarRespuestaErrorEntidadExiste(String mensaje);
+
     public void retornarRespuestaErrorReglaDeNegocio(String mensaje);
 }

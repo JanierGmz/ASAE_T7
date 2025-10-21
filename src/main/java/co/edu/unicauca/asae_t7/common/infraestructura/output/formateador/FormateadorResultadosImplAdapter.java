@@ -1,13 +1,14 @@
-package co.edu.unicauca.asae_t7.docente.infraestructura.output.formateador;
-
-import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.EntidadYaExisteException;
-import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.ReglaNegocioExcepcion;
-import co.edu.unicauca.asae_t7.docente.aplicacion.output.DocenteFormateadorResultadosIntPort;
+package co.edu.unicauca.asae_t7.common.infraestructura.output.formateador;
 
 import org.springframework.stereotype.Service;
 
+import co.edu.unicauca.asae_t7.common.aplicacion.output.FormateadorResultadosIntPort;
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.EntidadYaExisteException;
+import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.ReglaNegocioExcepcion;
+
 @Service
-public class DocenteFormateadorResultadosImplAdapter implements DocenteFormateadorResultadosIntPort{
+public class FormateadorResultadosImplAdapter implements FormateadorResultadosIntPort {
+
     @Override
     public void retornarRespuestaErrorEntidadExiste(String mensaje) {
         EntidadYaExisteException objException = new EntidadYaExisteException(mensaje);
@@ -19,4 +20,5 @@ public class DocenteFormateadorResultadosImplAdapter implements DocenteFormatead
         ReglaNegocioExcepcion objException = new ReglaNegocioExcepcion(mensaje);
         throw objException;
     }
+
 }

@@ -5,13 +5,14 @@ import java.util.List;
 import co.edu.unicauca.asae_t7.curso.aplicacion.input.GestionarCursoCUIntPort;
 import co.edu.unicauca.asae_t7.curso.aplicacion.output.GestionarCursoGatewayIntPort;
 import co.edu.unicauca.asae_t7.curso.dominio.modelos.Curso;
-import co.edu.unicauca.asae_t7.curso.aplicacion.output.CursoFormateadorResultadosIntPort;
+import co.edu.unicauca.asae_t7.common.aplicacion.output.FormateadorResultadosIntPort;
+
 
 public class GestionarCursoCUAdapter implements GestionarCursoCUIntPort{
     private final GestionarCursoGatewayIntPort objGestionarProductoGateway;
-    private final CursoFormateadorResultadosIntPort objCursoFormateadorResultados;
+    private final FormateadorResultadosIntPort objCursoFormateadorResultados;
 
-    public GestionarCursoCUAdapter(GestionarCursoGatewayIntPort objGestionarProductoGateway, CursoFormateadorResultadosIntPort objCursoFormateadorResultados) {
+    public GestionarCursoCUAdapter(GestionarCursoGatewayIntPort objGestionarProductoGateway, FormateadorResultadosIntPort objCursoFormateadorResultados) {
         this.objGestionarProductoGateway = objGestionarProductoGateway;
         this.objCursoFormateadorResultados = objCursoFormateadorResultados;
     }

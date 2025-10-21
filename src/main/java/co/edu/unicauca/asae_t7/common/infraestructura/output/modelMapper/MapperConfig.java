@@ -1,4 +1,4 @@
-package co.edu.unicauca.asae_t7.common.infraestructura.modelMapper;
+package co.edu.unicauca.asae_t7.common.infraestructura.output.modelMapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
