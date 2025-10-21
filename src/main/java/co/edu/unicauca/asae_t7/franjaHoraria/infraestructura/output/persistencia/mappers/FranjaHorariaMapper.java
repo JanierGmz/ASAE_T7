@@ -2,4 +2,5 @@ package co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.output.persistenci
 
 public class FranjaHorariaMapper {
 
+    /**No requerido */
 }

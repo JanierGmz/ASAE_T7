@@ -25,7 +25,7 @@ public class CursoRestController {
     @GetMapping("/cursos")
     public ResponseEntity<List<CursoDTORespuesta>> listar() {
         ResponseEntity<List<CursoDTORespuesta>> objRespuesta = new ResponseEntity<List<CursoDTORespuesta>>(
-            objMapeador.mappearDeCursosARespuesta(objGestionarCursoCUInt.listar()), 
+            objMapeador.mappearDeCursosARespuesta(this.objGestionarCursoCUInt.listar()), 
             HttpStatus.OK);
         return objRespuesta;
     }

@@ -14,5 +14,6 @@ public class Asignatura {
     private Integer id;
     private String nombre;
     private String codigo;
+    
     private List<Curso> cursos = new ArrayList<>();
 }

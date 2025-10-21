@@ -17,8 +17,8 @@ public class GestionarCursoCUAdapter implements GestionarCursoCUIntPort{
     }
 
     @Override
-    public boolean existeCursoPorCodigo(String codigo){
-        return objGestionarProductoGateway.existeCursoPorCodigo(codigo);
+    public boolean existeCursoPorId(Integer id){
+        return objGestionarProductoGateway.existeCursoPorId(id);
     }
 
     @Override

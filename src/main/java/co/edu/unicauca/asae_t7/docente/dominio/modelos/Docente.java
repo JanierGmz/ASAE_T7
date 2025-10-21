@@ -16,5 +16,5 @@ import java.util.List;
 public class Docente extends Persona{
     private Oficina objOficina;
 
-    //private List<Curso> cursos = new ArrayList<>();
+    private List<Curso> cursos = new ArrayList<>();
 }

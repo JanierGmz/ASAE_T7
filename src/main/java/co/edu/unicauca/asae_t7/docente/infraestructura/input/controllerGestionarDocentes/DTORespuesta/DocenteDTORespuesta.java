@@ -15,5 +15,4 @@ public class DocenteDTORespuesta {
     private String correo;
 
     private OficinaDTORespuesta objOficina;
-    // private List<CursoDTO> cursos; // si luego manejas cursos
 }

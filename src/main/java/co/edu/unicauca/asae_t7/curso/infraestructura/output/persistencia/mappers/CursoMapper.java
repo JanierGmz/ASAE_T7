@@ -4,10 +4,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.modelmapper.ModelMapper;
 
-@Configuration
+//@Configuration
 public class CursoMapper {
+
+    /* 
     @Bean
     public ModelMapper crearCursoMapper() {
         return new ModelMapper();
-    }
+    }*/
 }

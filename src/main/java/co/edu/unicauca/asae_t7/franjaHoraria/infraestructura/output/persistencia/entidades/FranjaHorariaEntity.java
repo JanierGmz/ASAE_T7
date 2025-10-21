@@ -2,6 +2,7 @@ package co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.output.persistenci
 
 import java.time.LocalTime;
 
+import co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.entidades.CursoEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -26,14 +27,14 @@ public class FranjaHorariaEntity {
     private String dia;
     private LocalTime horaInicio;
     private LocalTime horaFin;
-    
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@ManyToOne(fetch = FetchType.EAGER)
-   // @JoinColumn(name = "idEspacioFisico", nullable = false)
-   // private EspacioFisicoEntity objEspacioFisico;
-    
-   // @ManyToOne(fetch = FetchType.EAGER)
-   // @JoinColumn(name = "idCurso", nullable = false)
-    //private CursoEntity objCurso;
+
+    // @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idEspacioFisico", nullable = false)
+    private EspacioFisicoEntity objEspacioFisico;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCurso", nullable = false)
+    private CursoEntity objCurso;
 
 }

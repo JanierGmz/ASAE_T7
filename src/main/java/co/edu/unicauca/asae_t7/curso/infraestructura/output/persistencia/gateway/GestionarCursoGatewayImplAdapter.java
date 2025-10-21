@@ -24,8 +24,8 @@ public class GestionarCursoGatewayImplAdapter implements GestionarCursoGatewayIn
 
     @Override
     @Transactional(readOnly = true)
-    public boolean existeCursoPorCodigo(String codigo) {
-        return this.objCursoRepository.existeCursoPorCodigo(codigo) == 1;
+    public boolean existeCursoPorId(Integer id) {
+        return this.objCursoRepository.existsById(id);
     }
 
     @Override
@@ -37,6 +37,7 @@ public class GestionarCursoGatewayImplAdapter implements GestionarCursoGatewayIn
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Curso> listar() {
         Iterable<CursoEntity> lista = this.objCursoRepository.findAll();
         List<Curso> listaObtenida = this.cursoModelMapper.map(lista, new TypeToken<List<Curso>>() {
