@@ -3,6 +3,7 @@ package co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.output.persistenci
 import java.time.LocalTime;
 
 import co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.entidades.CursoEntity;
+import co.edu.unicauca.asae_t7.espacioFisico.infraestructura.output.persistencia.entidades.EspacioFisicoEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;

@@ -1,8 +1,9 @@
-package co.edu.unicauca.asae_t7.franjaHoraria.dominio.modelos;
+package co.edu.unicauca.asae_t7.espacioFisico.dominio.modelos;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.unicauca.asae_t7.franjaHoraria.dominio.modelos.FranjaHoraria;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

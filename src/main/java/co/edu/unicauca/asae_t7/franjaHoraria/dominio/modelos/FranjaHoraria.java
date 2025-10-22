@@ -3,6 +3,7 @@ package co.edu.unicauca.asae_t7.franjaHoraria.dominio.modelos;
 import java.time.LocalTime;
 
 import co.edu.unicauca.asae_t7.curso.dominio.modelos.Curso;
+import co.edu.unicauca.asae_t7.espacioFisico.dominio.modelos.EspacioFisico;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

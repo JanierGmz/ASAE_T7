@@ -1,8 +1,9 @@
-package co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.output.persistencia.entidades;
+package co.edu.unicauca.asae_t7.espacioFisico.infraestructura.output.persistencia.entidades;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.output.persistencia.entidades.FranjaHorariaEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
