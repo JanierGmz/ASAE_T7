@@ -23,20 +23,19 @@ public class ExisteDocente extends SolicitudFranjaHoraria {
         var docenteIds = objGestionarFranjaHorariaGateway
                 .obtenerDocenteIdsPorCurso(solicitudFranjaHoraria.getIdCurso());
         if (docenteIds == null || docenteIds.isEmpty()) {
-            System.out.println("El curso no tiene docentes asociados.");
             this.objFranjaHorariaFormateadorResultados
                     .retornarRespuestaErrorReglaDeNegocio(
-                            "Error: El curso no tiene docentes asociados.");
+                            "El curso no tiene docentes asociados.");
             return false;
         }
 
         for (Integer idDocente : docenteIds) {
             boolean existe = objGestionarFranjaHorariaGateway.existeDocente(idDocente);
+            //Caso no posible, pero por si acaso
             if (!existe) {
-                System.out.println("Algún docente asociado al curso no existe. ID=" + idDocente);
                 this.objFranjaHorariaFormateadorResultados
                         .retornarRespuestaErrorReglaDeNegocio(
-                                "Error: Docente asociado al curso no existe.");
+                                "Docente asociado al curso no existe.");
                 return false;
             }
         }

@@ -23,10 +23,9 @@ public class DocenteOcupado extends SolicitudFranjaHoraria {
         var docenteIds = objGestionarFranjaHorariaGateway
                 .obtenerDocenteIdsPorCurso(solicitudFranjaHoraria.getIdCurso());
         if (docenteIds == null || docenteIds.isEmpty()) {
-            System.out.println("El curso no tiene docentes asociados para validar ocupación.");
             this.objFranjaHorariaFormateadorResultados
                     .retornarRespuestaErrorReglaDeNegocio(
-                            "Error: El curso no tiene docentes asociados.");
+                            "El curso no tiene docentes asociados.");
             return false;
         }
 
@@ -38,10 +37,9 @@ public class DocenteOcupado extends SolicitudFranjaHoraria {
                     idDocente);
 
             if (ocupado == 1) {
-                System.out.println("Algún docente del curso está ocupado en el horario solicitado. ID=" + idDocente);
                 this.objFranjaHorariaFormateadorResultados
                         .retornarRespuestaErrorReglaDeNegocio(
-                                "Error: Algún docente del curso está ocupado en el horario solicitado.");
+                                "Algún docente del curso está ocupado en el horario solicitado.");
                 return false;
             }
         }

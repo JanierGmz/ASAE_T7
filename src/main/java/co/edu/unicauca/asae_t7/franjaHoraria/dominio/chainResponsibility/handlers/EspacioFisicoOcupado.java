@@ -24,10 +24,9 @@ public class EspacioFisicoOcupado extends SolicitudFranjaHoraria {
                 solicitudFranjaHoraria.getHoraInicio(),
                 solicitudFranjaHoraria.getHoraFin(), solicitudFranjaHoraria.getIdEspacioFisico());
         if (ocupado) {
-            System.out.println("El espacio físico está ocupado en el horario solicitado.");
             this.objFranjaHorariaFormateadorResultados
                     .retornarRespuestaErrorReglaDeNegocio(
-                            "Error: El espacio físico está ocupado en el horario solicitado.");
+                            "El espacio físico está ocupado en el horario solicitado.");
             return false;
         }
         if (this.getSiguiente() != null) {

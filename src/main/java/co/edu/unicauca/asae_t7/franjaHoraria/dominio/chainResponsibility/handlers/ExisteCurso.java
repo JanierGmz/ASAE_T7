@@ -20,7 +20,6 @@ public class ExisteCurso extends SolicitudFranjaHoraria {
     @Override
     public boolean procesarSolicitud(FranjaHoraria solicitudFranjaHoraria) {
         if (solicitudFranjaHoraria.getIdCurso() == null) {
-            System.out.println("El ID del curso es nulo.");
             this.objFranjaHorariaFormateadorResultados
                     .retornarRespuestaErrorReglaDeNegocio(
                             "Error: El ID del curso es requerido.");
@@ -29,10 +28,9 @@ public class ExisteCurso extends SolicitudFranjaHoraria {
         
         boolean existe = objGestionarFranjaHorariaGateway.existeCurso(solicitudFranjaHoraria.getIdCurso());
         if (!existe) {
-            System.out.println("El curso no existe.");
             this.objFranjaHorariaFormateadorResultados
                     .retornarRespuestaErrorReglaDeNegocio(
-                            "Error: El curso no existe.");
+                            "El curso no existe.");
             return false;
         }
         if (this.getSiguiente() != null) {

@@ -26,17 +26,22 @@ public class ValidacionChain {
 
     @PostConstruct
     public void configurarCadena() {
+        this.existeEspacioFisicoHandler.setSiguiente(existeCursoHandler);
+        this.existeCursoHandler.setSiguiente(existeDocenteHandler);
+        this.existeDocenteHandler.setSiguiente(espacioFisicoOcupadoHandler);
+        this.espacioFisicoOcupadoHandler.setSiguiente(docenteOcupadoHandler);
+        /* 
         // Primero validar existencia de curso y espacio físico
         existeCursoHandler.setSiguiente(existeEspacioFisicoHandler);
         // Luego validar docentes del curso (existencia y ocupación)
         existeEspacioFisicoHandler.setSiguiente(existeDocenteHandler);
         existeDocenteHandler.setSiguiente(docenteOcupadoHandler);
         // Finalmente validar ocupación del espacio físico
-        docenteOcupadoHandler.setSiguiente(espacioFisicoOcupadoHandler);
+        docenteOcupadoHandler.setSiguiente(espacioFisicoOcupadoHandler);*/
     }
 
     public boolean validar(FranjaHoraria objFranjaHoraria) {
-        return existeDocenteHandler.procesarSolicitud(objFranjaHoraria);
+        return existeEspacioFisicoHandler.procesarSolicitud(objFranjaHoraria);
     }
 
 }

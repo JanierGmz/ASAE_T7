@@ -20,20 +20,18 @@ public class ExisteEspacioFisico extends SolicitudFranjaHoraria {
     @Override
     public boolean procesarSolicitud(FranjaHoraria solicitudFranjaHoraria) {
         if (solicitudFranjaHoraria.getIdEspacioFisico() == null) {
-            System.out.println("El ID del espacio físico es nulo.");
             this.objFranjaHorariaFormateadorResultados
                     .retornarRespuestaErrorReglaDeNegocio(
-                            "Error: El ID del espacio físico es requerido.");
+                            "El ID del espacio físico es requerido.");
             return false;
         }
-        
+
         boolean existe = objGestionarFranjaHorariaGateway
                 .existeEspacioFisico(solicitudFranjaHoraria.getIdEspacioFisico());
         if (!existe) {
-            System.out.println("El espacio físico no existe.");
             this.objFranjaHorariaFormateadorResultados
                     .retornarRespuestaErrorReglaDeNegocio(
-                            "Error: El espacio físico no existe.");
+                            "El espacio físico no existe.");
             return false;
         }
         if (this.getSiguiente() != null) {

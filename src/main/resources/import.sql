@@ -50,6 +50,8 @@ INSERT INTO franjashorarias (id, dia, horaInicio, horaFin, idEspacioFisico, idCu
 
 -- Relación Docente-Curso (tabla intermedia DocenteCurso)
 INSERT INTO cursodocente (idDocente, idCurso) VALUES (1, 1);
-INSERT INTO cursodocente (idDocente, idCurso) VALUES (2, 2);
+INSERT INTO cursodocente (idDocente, idCurso) VALUES (2, 1);
+INSERT INTO cursodocente (idDocente, idCurso) VALUES (1, 2);
+INSERT INTO cursodocente (idDocente, idCurso) VALUES (3, 2);
 INSERT INTO cursodocente (idDocente, idCurso) VALUES (3, 3);
 INSERT INTO cursodocente (idDocente, idCurso) VALUES (4, 3);
