@@ -1,5 +1,8 @@
 package co.edu.unicauca.asae_t7.franjaHoraria.aplicacion.output;
 
-public interface GestionarFranjaHorariaGatewayIntPort {
+import co.edu.unicauca.asae_t7.franjaHoraria.dominio.modelos.FranjaHoraria;
 
+public interface GestionarFranjaHorariaGatewayIntPort {
+    
+    public FranjaHoraria guardar(FranjaHoraria objFranjaHoraria);
 }

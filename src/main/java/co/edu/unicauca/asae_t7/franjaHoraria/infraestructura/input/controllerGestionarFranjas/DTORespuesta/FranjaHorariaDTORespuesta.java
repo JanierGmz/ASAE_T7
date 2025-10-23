@@ -14,4 +14,7 @@ public class FranjaHorariaDTORespuesta {
     private String dia;
     private LocalTime horaInicio;
     private LocalTime horaFin;
+
+    private Integer idCurso;
+    private Integer idEspacioFisico;
 }
