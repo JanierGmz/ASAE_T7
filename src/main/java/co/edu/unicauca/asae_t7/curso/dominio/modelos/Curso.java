@@ -16,6 +16,8 @@ public class Curso {
     private Integer id;
     private String nombre;
     private Asignatura objAsignatura;
+    private Integer cantidadEstudiantesMatriculados;
+
     
     private List<FranjaHoraria> franjasHorarias = new ArrayList<>();
     private List<Docente> docentes = new ArrayList<>();

@@ -37,11 +37,11 @@ INSERT INTO espaciosfisicos (id, nombre, capacidad, estado, ubicacion) VALUES (4
 INSERT INTO espaciosfisicos (id, nombre, capacidad, estado, ubicacion) VALUES (5, 'Salón 227', 30, 1, 'FIET');
 
 -- Cursos
-INSERT INTO cursos (id, nombre, idAsignatura) VALUES (1, 'Cálculo I - Grupo A', 1);
-INSERT INTO cursos (id, nombre, idAsignatura) VALUES (2, 'Mecánica - Grupo A', 2);
-INSERT INTO cursos (id, nombre, idAsignatura) VALUES (3, 'Programación Orientada a Objetos - Grupo A', 3);
-INSERT INTO cursos (id, nombre, idAsignatura) VALUES (4, 'Programación Orientada a Objetos - Grupo B', 3);
-INSERT INTO cursos (id, nombre, idAsignatura) VALUES (5, 'Bases de Datos I - Grupo A', 4);
+INSERT INTO cursos (id, nombre, idAsignatura, cantidadEstudiantesMatriculados) VALUES (1, 'Cálculo I - Grupo A', 1, 35);
+INSERT INTO cursos (id, nombre, idAsignatura, cantidadEstudiantesMatriculados) VALUES (2, 'Mecánica - Grupo A', 2, 25);
+INSERT INTO cursos (id, nombre, idAsignatura, cantidadEstudiantesMatriculados) VALUES (3, 'Programación Orientada a Objetos - Grupo A', 3, 20);
+INSERT INTO cursos (id, nombre, idAsignatura, cantidadEstudiantesMatriculados) VALUES (4, 'Programación Orientada a Objetos - Grupo B', 3, 25);
+INSERT INTO cursos (id, nombre, idAsignatura, cantidadEstudiantesMatriculados) VALUES (5, 'Bases de Datos I - Grupo A', 4, 35);
 
 -- Franjas Horarias
 INSERT INTO franjashorarias (id, dia, horaInicio, horaFin, idEspacioFisico, idCurso) VALUES (1, 'Lunes', '09:00:00', '11:00:00', 2, 1);

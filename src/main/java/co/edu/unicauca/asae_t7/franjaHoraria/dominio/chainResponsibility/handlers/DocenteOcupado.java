@@ -1,5 +1,7 @@
 package co.edu.unicauca.asae_t7.franjaHoraria.dominio.chainResponsibility.handlers;
 
+import java.util.List;
+
 import co.edu.unicauca.asae_t7.common.aplicacion.output.FormateadorResultadosIntPort;
 import co.edu.unicauca.asae_t7.franjaHoraria.aplicacion.output.GestionarFranjaHorariaGatewayIntPort;
 import co.edu.unicauca.asae_t7.franjaHoraria.dominio.chainResponsibility.chain.SolicitudFranjaHoraria;
@@ -20,7 +22,7 @@ public class DocenteOcupado extends SolicitudFranjaHoraria {
     @Override
     public boolean procesarSolicitud(FranjaHoraria solicitudFranjaHoraria) {
 
-        var docenteIds = objGestionarFranjaHorariaGateway
+        List<Integer> docenteIds = objGestionarFranjaHorariaGateway
                 .obtenerDocenteIdsPorCurso(solicitudFranjaHoraria.getIdCurso());
         if (docenteIds == null || docenteIds.isEmpty()) {
             this.objFranjaHorariaFormateadorResultados

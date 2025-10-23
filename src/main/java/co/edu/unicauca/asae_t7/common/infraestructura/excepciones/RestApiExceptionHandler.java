@@ -3,7 +3,6 @@ package co.edu.unicauca.asae_t7.common.infraestructura.excepciones;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,9 +15,7 @@ import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.EntidadN
 import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.EntidadYaExisteException;
 import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.tipos.ReglaNegocioExcepcion;
 import jakarta.validation.ConstraintViolationException;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 @ControllerAdvice
 public class RestApiExceptionHandler {
@@ -70,16 +67,30 @@ public class RestApiExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex, HttpServletRequest request) {
+    public ResponseEntity<Error> handleValidationExceptions(MethodArgumentNotValidException ex, HttpServletRequest request) {
         System.out.println("Retornando respuesta con los errores identificados");
-        Map<String, String> errores = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String campo = ((FieldError) error).getField();
-            String mensajeDeError = error.getDefaultMessage();
-            errores.put(campo, mensajeDeError);
-        });
-
-        return new ResponseEntity<Map<String, String>>(errores, HttpStatus.BAD_REQUEST);
+        
+        // Buscar si hay errores de capacidad de espacio físico
+        boolean hayErrorCapacidad = ex.getBindingResult().getAllErrors().stream()
+                .anyMatch(error -> error.getCode().equals("CapacidadEspacioFisico"));
+        
+        if (hayErrorCapacidad) {
+            // Si hay error de capacidad, usar el código específico
+            final Error error = ErrorUtils
+                    .crearError(CodigoError.CAPACIDAD_INSUFICIENTE.getCodigo(),
+                            CodigoError.CAPACIDAD_INSUFICIENTE.getLlaveMensaje(),
+                            HttpStatus.BAD_REQUEST.value())
+                    .setUrl(request.getRequestURL().toString()).setMetodo(request.getMethod());
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        } else {
+            // Para otros errores de validación, usar el código genérico
+            final Error error = ErrorUtils
+                    .crearError(CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getCodigo(),
+                            "Error de validación: " + ex.getBindingResult().getAllErrors().get(0).getDefaultMessage(),
+                            HttpStatus.BAD_REQUEST.value())
+                    .setUrl(request.getRequestURL().toString()).setMetodo(request.getMethod());
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)

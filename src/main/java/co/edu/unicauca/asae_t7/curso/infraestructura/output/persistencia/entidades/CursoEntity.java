@@ -36,6 +36,9 @@ public class CursoEntity {
     @Column(length = 50)
     private String nombre;
 
+    @Column(nullable = false)
+    private Integer cantidadEstudiantesMatriculados;
+
     /*
      * @Column(length = 20, unique = true)
      * private String codigo;

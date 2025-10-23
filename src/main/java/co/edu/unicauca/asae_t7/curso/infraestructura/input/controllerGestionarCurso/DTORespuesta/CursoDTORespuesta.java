@@ -14,6 +14,8 @@ public class CursoDTORespuesta {
     private Integer id;
     private String nombre;
 
+    private Integer cantidadEstudiantesMatriculados;
+
     //private AsignaturaDTORespuesta objAsignatura;
 
     /*@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "objCurso")

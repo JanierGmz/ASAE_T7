@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.DTOPeticion;
 
+import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.validaciones.CapacidadEspacioFisico;
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.validaciones.DiaValido;
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.validaciones.HoraMilitar;
 import jakarta.validation.constraints.*;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@CapacidadEspacioFisico
 public class FranjaHorariaDTOPeticion {
 
     @NotBlank(message = "{franjaHoraria.dia.notBlank}")
@@ -28,7 +30,7 @@ public class FranjaHorariaDTOPeticion {
     @Positive(message = "{franjaHoraria.espacioFisico.positive}")
     private Integer idEspacioFisico;
 
-    //@NotNull(message = "{franjaHoraria.curso.notNull}")
+    @NotNull(message = "{franjaHoraria.curso.notNull}")
     @Positive(message = "{franjaHoraria.curso.positive}")
     private Integer idCurso;
 }

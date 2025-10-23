@@ -15,6 +15,7 @@ import jakarta.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CursoDTOPeticion {
+    
     @NotEmpty(message = "{curso.nombre.notEmpty}")
     @NotNull(message = "{curso.nombre.notNull}")
     @Size(min = 3, max = 50, message = "{curso.nombre.length}")
@@ -22,6 +23,8 @@ public class CursoDTOPeticion {
 
     @NotNull(message = "{curso.asignatura.notNull}")
     private AsignaturaDTOPeticion objAsignatura;
+
+    private Integer cantidadEstudiantesMatriculados;
 
     /*@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "objCurso")
     private List<FranjaHoraria> franjasHorarias = new ArrayList<>();
