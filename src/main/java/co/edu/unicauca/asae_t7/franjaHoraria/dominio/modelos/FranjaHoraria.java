@@ -18,6 +18,7 @@ public class FranjaHoraria {
 
     private Integer idEspacioFisico;
     private Integer idCurso;
+    private Integer idDocente;
     //private EspacioFisico objEspacioFisico;
     //private Curso objCurso;
 }

@@ -26,6 +26,7 @@ public class FranjaHorariaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String dia;
+
     private LocalTime horaInicio;
     private LocalTime horaFin;
 

@@ -28,7 +28,7 @@ public class FranjaHorariaDTOPeticion {
     @Positive(message = "{franjaHoraria.espacioFisico.positive}")
     private Integer idEspacioFisico;
 
-    @NotNull(message = "{franjaHoraria.curso.notNull}")
+    //@NotNull(message = "{franjaHoraria.curso.notNull}")
     @Positive(message = "{franjaHoraria.curso.positive}")
     private Integer idCurso;
 }
