@@ -13,7 +13,7 @@ public interface FranjaHorariaMapperInfraestructuraDominio {
     
     FranjaHoraria mappearDePeticionAFranjaHoraria(FranjaHorariaDTOPeticion peticion);
 
-    FranjaHorariaDTORespuesta mappearDeFranjaHorariaARespuesta(FranjaHoraria objFranjaHoraria);
+    FranjaHorariaDTORespuesta mappearDeFranjaHorariaARespuesta(FranjaHoraria objFranjaCreada);
 
     List<FranjaHorariaDTORespuesta> mappearDeProductosARespuesta(List<FranjaHoraria> franjaHorarias);
 }

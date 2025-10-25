@@ -92,5 +92,6 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
         public List<Integer> obtenerDocenteIdsPorCurso(Integer idCurso) {
                 return this.objCursoRepository.findDocenteIdsByCursoId(idCurso);
         }
+        
 
 }
