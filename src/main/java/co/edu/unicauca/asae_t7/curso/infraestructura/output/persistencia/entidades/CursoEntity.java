@@ -39,11 +39,6 @@ public class CursoEntity {
     @Column(nullable = false)
     private Integer cantidadEstudiantesMatriculados;
 
-    /*
-     * @Column(length = 20, unique = true)
-     * private String codigo;
-     */
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idAsignatura", nullable = false)
     private AsignaturaEntity objAsignatura;

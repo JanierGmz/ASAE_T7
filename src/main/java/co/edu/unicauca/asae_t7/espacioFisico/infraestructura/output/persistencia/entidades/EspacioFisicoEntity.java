@@ -36,6 +36,7 @@ public class EspacioFisicoEntity {
     @Column(length = 100)
     private String ubicacion;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "objEspacioFisico")
+    //@OneToMany(fetch = FetchType.LAZY, mappedBy = "objEspacioFisico")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "objEspacioFisico")
     private List<FranjaHorariaEntity> franjasHorarias = new ArrayList<>();
 }

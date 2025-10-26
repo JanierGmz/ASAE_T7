@@ -1,0 +1,886 @@
+{
+	"info": {
+		"_postman_id": "fdcb4e4a-94ca-43a3-8e21-7109e500acd4",
+		"name": "ASAE Taller 7",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30886559"
+	},
+	"item": [
+		{
+			"name": "1 Pruebas Keywords",
+			"item": [
+				{
+					"name": "1 Listar Espacios Físicos por Nombre y Capacidad",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"miércoles\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 1,\r\n  \"idCurso\": 5\r\n}\r\n"
+						},
+						"url": {
+							"raw": "localhost:8080/api/espaciosFisicos?nombre=sal&capacidad=25",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"espaciosFisicos"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "sal"
+								},
+								{
+									"key": "capacidad",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 Listar Cursos  por nombre de Asignatura",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cursos/asignatura?nombreAsignatura=Programación Orientada a Objetos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cursos",
+								"asignatura"
+							],
+							"query": [
+								{
+									"key": "nombreAsignatura",
+									"value": "Programación Orientada a Objetos"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 Listar Franjas ocupadas por un curso",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/franjas-horarias/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2 Comprobaciones de reglas de Negocio",
+			"item": [
+				{
+					"name": "1 Crear Docente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"Carlos Andrés\",\r\n  \"apellidos\": \"Ramírez Gómez\",\r\n  \"correo\": \"carlosramirez@unicauca.edu.co\",\r\n  \"objOficina\": {\r\n    \"nombre\": \"Oficina de Ingeniería de Sistemas\",\r\n    \"ubicacion\": \"Edificio 2, segundo piso, bloque B\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/docentes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"docentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 Crear Franja Correcta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"miércoles\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 1,\r\n  \"idCurso\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 Crear Franja Docente Ocupado",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"miércoles\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 2,\r\n  \"idCurso\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4 Crear Franja Espacio Ocupado",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"miércoles\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 1,\r\n  \"idCurso\": 3\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5 Crear Franja Curso no Existe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"miércoles\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 1,\r\n  \"idCurso\": 30\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 Crear Franja Espacio no Existe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"miércoles\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 100,\r\n  \"idCurso\": 3\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7 Crear Franja Curso sin docentes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"miércoles\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 2,\r\n  \"idCurso\": 5\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3 Validaciones automáticas en DTO",
+			"item": [
+				{
+					"name": "1 Crear Docente con Error en Nombre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"Xa\",\r\n  \"apellidos\": \"Ramirez\",\r\n  \"correo\": \"xamirramirez@unicauca.edu.co\",\r\n  \"objOficina\": {\r\n    \"nombre\": \"Oficina de Ingeniería de Sistemas\",\r\n    \"ubicacion\": \"Edificio 2, segundo piso, bloque B\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/docentes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"docentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1.1 Crear Docente sin Error en nombre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"Xamir\",\r\n  \"apellidos\": \"Ramírez\",\r\n  \"correo\": \"xamirramirez@unicauca.edu.co\",\r\n  \"objOficina\": {\r\n    \"nombre\": \"Oficina 202\",\r\n    \"ubicacion\": \"Edificio 2, segundo piso, bloque B\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/docentes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"docentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 Crear Docente con Error en correo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"Xamir\",\r\n  \"apellidos\": \"Ramirez\",\r\n  \"correo\": \"xamirramirez@\",\r\n  \"objOficina\": {\r\n    \"nombre\": \"Oficina de Ingeniería de Sistemas\",\r\n    \"ubicacion\": \"Edificio 2, segundo piso, bloque B\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/docentes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"docentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2.2 Crear Docente sin Error en correo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"Xamir Alejandro\",\r\n  \"apellidos\": \"Ramirez\",\r\n  \"correo\": \"xamiraram@unicauca.edu.co\",\r\n  \"objOficina\": {\r\n    \"nombre\": \"Oficina 204\",\r\n    \"ubicacion\": \"Edificio 2, segundo piso, bloque B\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/docentes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"docentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 Crear Franja con ID Espacio incorrecto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"viernes\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 0,\r\n  \"idCurso\": 3\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3 Crear Franja con ID Espacio correcto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"viernes\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 1,\r\n  \"idCurso\": 3\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4 Validaciones personalizadas en DTO",
+			"item": [
+				{
+					"name": "1 Crear Franja con Espacio sin capacidad",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"miércoles\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 1,\r\n  \"idCurso\": 5\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 Crear Franja con hora incorrecta",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"sabado\",\r\n  \"horaInicio\": \"9:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 1,\r\n  \"idCurso\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 Crear Franja con día incorrecto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"domingo\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 1,\r\n  \"idCurso\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4 Crear Franja con horario incorrecto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"jueves\",\r\n  \"horaInicio\": \"13:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 1,\r\n  \"idCurso\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5 Servicios REST que utilizan los Entitys",
+			"item": [
+				{
+					"name": "1 Crear Franja",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dia\": \"sabado\",\r\n  \"horaInicio\": \"09:00\",\r\n  \"horaFin\": \"11:00\",\r\n  \"idEspacioFisico\": 1,\r\n  \"idCurso\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/franjas-horarias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 Crear Docente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"Luis Edmundo\",\r\n  \"apellidos\": \"Ruiz\",\r\n  \"correo\": \"luizruiz@unicauca.edu.co\",\r\n  \"objOficina\": {\r\n    \"nombre\": \"Oficina 200\",\r\n    \"ubicacion\": \"Edificio 3, segundo piso, bloque c\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/docentes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"docentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 Listar franja horaria por docente",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "4 Listar franja horaria por curso (Sin detalle)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/franjas-horarias/curso-sin-detalle/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias",
+								"curso-sin-detalle",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 Actualizar estado de Espacio Físico",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/espaciosFisicos/actualizarEstado?id=2&estado=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"espaciosFisicos",
+								"actualizarEstado"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								},
+								{
+									"key": "estado",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7 Eliminar franjas de un curso",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/franjas-horarias/curso/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias",
+								"curso",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5 Listar Espacios fisicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/espaciosFisicos?nombre=au&capacidad=25",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"espaciosFisicos"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "au"
+								},
+								{
+									"key": "capacidad",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

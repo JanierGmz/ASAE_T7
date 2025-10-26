@@ -12,6 +12,6 @@ public interface CursoMapperInfraestructuraDominio {
     Curso mappearDePeticionACurso(CursoDTOPeticion peticion);
 
     CursoDTORespuesta mappearDeCursoACursoRespuesta(Curso objCurso);
-    
+
     List<CursoDTORespuesta> mappearDeCursosARespuesta(List<Curso> cursos);
 }

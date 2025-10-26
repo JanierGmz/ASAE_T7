@@ -15,9 +15,8 @@ import co.edu.unicauca.asae_t7.curso.aplicacion.input.GestionarCursoCUIntPort;
 import co.edu.unicauca.asae_t7.curso.infraestructura.input.controllerGestionarCurso.mappers.CursoMapperInfraestructuraDominio;
 import co.edu.unicauca.asae_t7.curso.infraestructura.input.controllerGestionarCurso.DTORespuesta.CursoDTORespuesta;
 
-
 @RestController
-@RequestMapping("/api") 
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class CursoRestController {
     private final GestionarCursoCUIntPort objGestionarCursoCUInt;
@@ -26,16 +25,17 @@ public class CursoRestController {
     @GetMapping("/cursos")
     public ResponseEntity<List<CursoDTORespuesta>> listar() {
         ResponseEntity<List<CursoDTORespuesta>> objRespuesta = new ResponseEntity<List<CursoDTORespuesta>>(
-            objMapeador.mappearDeCursosARespuesta(this.objGestionarCursoCUInt.listar()), 
-            HttpStatus.OK);
+                objMapeador.mappearDeCursosARespuesta(this.objGestionarCursoCUInt.listar()),
+                HttpStatus.OK);
         return objRespuesta;
     }
 
     @GetMapping("/cursos/asignatura")
     public ResponseEntity<List<CursoDTORespuesta>> buscarCursosPorAsignatura(@RequestParam String nombreAsignatura) {
         ResponseEntity<List<CursoDTORespuesta>> objRespuesta = new ResponseEntity<List<CursoDTORespuesta>>(
-            objMapeador.mappearDeCursosARespuesta(this.objGestionarCursoCUInt.buscarCursosPorAsignatura(nombreAsignatura)), 
-            HttpStatus.OK);
+                objMapeador.mappearDeCursosARespuesta(
+                        this.objGestionarCursoCUInt.buscarCursosPorAsignatura(nombreAsignatura)),
+                HttpStatus.OK);
         return objRespuesta;
     }
 }

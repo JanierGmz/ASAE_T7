@@ -14,7 +14,7 @@ public enum CodigoError {
     CREDENCIALES_INVALIDAS("GC-0005", "Error al iniciar sesión, compruebe sus credenciales y vuelva a intentarlo"),
     USUARIO_DESHABILITADO("GC-0006",
             "El usuario no ha sido verificado, por favor revise su correo para verificar su cuenta"),
-    CAPACIDAD_INSUFICIENTE("GC-0007", "La capacidad del espacio físico es insuficiente para la cantidad de estudiantes matriculados en el curso");
+    CAPACIDAD_INSUFICIENTE("GC-0007", "Capacidad insuficiente");
 
     private final String codigo;
     private final String llaveMensaje;

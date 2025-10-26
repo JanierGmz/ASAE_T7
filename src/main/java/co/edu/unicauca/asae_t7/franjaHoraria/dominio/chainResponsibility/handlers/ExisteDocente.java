@@ -36,7 +36,7 @@ public class ExisteDocente extends SolicitudFranjaHoraria {
             //Caso no posible, pero por si acaso
             if (!existe) {
                 this.objFranjaHorariaFormateadorResultados
-                        .retornarRespuestaErrorReglaDeNegocio(
+                        .retornarRespuestaErrorEntidadNoExiste(
                                 "Docente asociado al curso no existe.");
                 return false;
             }

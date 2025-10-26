@@ -8,7 +8,7 @@ import co.edu.unicauca.asae_t7.franjaHoraria.aplicacion.output.GestionarFranjaHo
 import co.edu.unicauca.asae_t7.franjaHoraria.dominio.chainResponsibility.handlers.ValidacionChain;
 import co.edu.unicauca.asae_t7.franjaHoraria.dominio.modelos.FranjaHoraria;
 
-public class GestionarFranjaHorariaCUAdapter  implements GestionarFranjaHorariaCUIntPort{
+public class GestionarFranjaHorariaCUAdapter implements GestionarFranjaHorariaCUIntPort {
 
     private final GestionarFranjaHorariaGatewayIntPort objGestionarFranjaHorariaGateway;
 
@@ -16,8 +16,9 @@ public class GestionarFranjaHorariaCUAdapter  implements GestionarFranjaHorariaC
 
     private final ValidacionChain objValidacionChain;
 
-    public GestionarFranjaHorariaCUAdapter(GestionarFranjaHorariaGatewayIntPort objGestionarFranjaHorariaGateway,  FormateadorResultadosIntPort objFranjaHorariaFormateadorResultados,
-    ValidacionChain objValidacionChain) {
+    public GestionarFranjaHorariaCUAdapter(GestionarFranjaHorariaGatewayIntPort objGestionarFranjaHorariaGateway,
+            FormateadorResultadosIntPort objFranjaHorariaFormateadorResultados,
+            ValidacionChain objValidacionChain) {
         this.objGestionarFranjaHorariaGateway = objGestionarFranjaHorariaGateway;
         this.objFranjaHorariaFormateadorResultados = objFranjaHorariaFormateadorResultados;
         this.objValidacionChain = objValidacionChain;
@@ -25,19 +26,21 @@ public class GestionarFranjaHorariaCUAdapter  implements GestionarFranjaHorariaC
 
     @Override
     public FranjaHoraria crear(FranjaHoraria objFranjaHoraria) {
-        
-        if(!objValidacionChain.validar(objFranjaHoraria)){
-            this.objFranjaHorariaFormateadorResultados.retornarRespuestaErrorReglaDeNegocio("Error: La franja horaria no cumple con las reglas de negocio.");
+
+        if (!objValidacionChain.validar(objFranjaHoraria)) {
+            this.objFranjaHorariaFormateadorResultados.retornarRespuestaErrorReglaDeNegocio(
+                    "Error: La franja horaria no cumple con las reglas de negocio.");
             return null;
         }
         return this.objGestionarFranjaHorariaGateway.guardar(objFranjaHoraria);
     }
 
     @Override
-
     public List<FranjaHoraria> obtenerPorCursoId(Integer idCurso) {
         return this.objGestionarFranjaHorariaGateway.findByObjCursoId(idCurso);
     }
+
+    @Override
     public List<FranjaHoraria> buscarFranjasHorariasPorCursoId(Integer idCurso) {
         return this.objGestionarFranjaHorariaGateway.buscarFranjasHorariasPorCursoId(idCurso);
     }
@@ -45,5 +48,10 @@ public class GestionarFranjaHorariaCUAdapter  implements GestionarFranjaHorariaC
     @Override
     public boolean eliminarFranjasHorariasPorCursoId(Integer idCurso) {
         return this.objGestionarFranjaHorariaGateway.eliminarFranjasHorariasPorCursoId(idCurso);
+    }
+
+    @Override
+    public List<FranjaHoraria> buscarFranjasSinCursoPorCursoId(Integer idCurso) {
+        return this.objGestionarFranjaHorariaGateway.buscarFranjasSinCursoPorCursoId(idCurso);
     }
 }

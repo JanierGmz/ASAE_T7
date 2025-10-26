@@ -30,7 +30,7 @@ public class ExisteEspacioFisico extends SolicitudFranjaHoraria {
                 .existeEspacioFisico(solicitudFranjaHoraria.getIdEspacioFisico());
         if (!existe) {
             this.objFranjaHorariaFormateadorResultados
-                    .retornarRespuestaErrorReglaDeNegocio(
+                    .retornarRespuestaErrorEntidadNoExiste(
                             "El espacio físico no existe.");
             return false;
         }

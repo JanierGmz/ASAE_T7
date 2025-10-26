@@ -29,7 +29,7 @@ public class ExisteCurso extends SolicitudFranjaHoraria {
         boolean existe = objGestionarFranjaHorariaGateway.existeCurso(solicitudFranjaHoraria.getIdCurso());
         if (!existe) {
             this.objFranjaHorariaFormateadorResultados
-                    .retornarRespuestaErrorReglaDeNegocio(
+                    .retornarRespuestaErrorEntidadNoExiste(
                             "El curso no existe.");
             return false;
         }

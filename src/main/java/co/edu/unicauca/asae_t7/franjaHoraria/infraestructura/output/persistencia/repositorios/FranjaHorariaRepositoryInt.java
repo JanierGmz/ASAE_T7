@@ -8,12 +8,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.output.persistencia.entidades.FranjaHorariaEntity;
 
 public interface FranjaHorariaRepositoryInt extends JpaRepository<FranjaHorariaEntity, Integer> {
 
-    /**
+	/**
 	 * Buscar franjas horarias por ID de curso
 	 * 
 	 * @param idCurso
@@ -76,4 +75,17 @@ public interface FranjaHorariaRepositoryInt extends JpaRepository<FranjaHorariaE
 	@Modifying
 	@Query(value = "DELETE FROM FranjaHorariaEntity f WHERE f.objCurso.id = :idCurso")
 	Integer deleteFranjasByCursoId(@Param("idCurso") Integer idCurso);
+
+	/**
+	 * Buscar franjas horarias por ID de curso con espacios físicos y datos de docentes
+	 * 
+	 * @param idCurso
+	 * @return
+	 */
+	@Query("SELECT f FROM FranjaHorariaEntity f " +
+			"JOIN FETCH f.objEspacioFisico e " +
+			"JOIN f.objCurso c " +
+			"JOIN c.docentes d " +
+			"WHERE c.id = :idCurso")
+	List<FranjaHorariaEntity> findFranjasHorariasConDetallesPorCursoId(@Param("idCurso") Integer idCurso);
 }

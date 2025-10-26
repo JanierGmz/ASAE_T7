@@ -1,6 +1,7 @@
 package co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.output.persistencia.gateway;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -8,8 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.modelmapper.TypeToken;
+
 import co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.entidades.CursoEntity;
 import co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.repositorios.CursoRepositoryInt;
+import co.edu.unicauca.asae_t7.docente.dominio.modelos.Docente;
+import co.edu.unicauca.asae_t7.docente.infraestructura.output.persistencia.entidades.DocenteEntity;
 import co.edu.unicauca.asae_t7.docente.infraestructura.output.persistencia.repositorios.DocenteRepositoryInt;
 import co.edu.unicauca.asae_t7.espacioFisico.infraestructura.output.persistencia.entidades.EspacioFisicoEntity;
 import co.edu.unicauca.asae_t7.espacioFisico.infraestructura.output.persistencia.repositorios.EspacioFisicoRepositoryInt;
@@ -105,17 +109,18 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
         public List<FranjaHoraria> findByObjCursoId(Integer idCurso) {
                 List<FranjaHorariaEntity> entities = objFranjaHorariaRepository.findByObjCursoId(idCurso);
                 return entities.stream()
-                        .map(entity -> franjaHorariaModelMapper.map(entity, FranjaHoraria.class))
-                        .toList();
+                                .map(entity -> franjaHorariaModelMapper.map(entity, FranjaHoraria.class))
+                                .toList();
         }
-        
 
         @Override
         @Transactional(readOnly = true)
         public List<FranjaHoraria> buscarFranjasHorariasPorCursoId(Integer idCurso) {
-                Iterable<FranjaHorariaEntity> listaFranjasHorariasEntity = this.objFranjaHorariaRepository.findFranjasYEspacioPorCursoId(idCurso);
-                List<FranjaHoraria> listaFranjasHorarias = this.franjaHorariaModelMapper.map(listaFranjasHorariasEntity, new TypeToken<List<FranjaHoraria>>() {
-                }.getType());
+                Iterable<FranjaHorariaEntity> listaFranjasHorariasEntity = this.objFranjaHorariaRepository
+                                .findFranjasYEspacioPorCursoId(idCurso);
+                List<FranjaHoraria> listaFranjasHorarias = this.franjaHorariaModelMapper.map(listaFranjasHorariasEntity,
+                                new TypeToken<List<FranjaHoraria>>() {
+                                }.getType());
                 return listaFranjasHorarias;
         }
 
@@ -123,5 +128,29 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
         @Transactional
         public boolean eliminarFranjasHorariasPorCursoId(Integer idCurso) {
                 return this.objFranjaHorariaRepository.deleteFranjasByCursoId(idCurso) > 0;
+        }
+
+        @Override
+        @Transactional(readOnly = true)
+        public List<FranjaHoraria> buscarFranjasSinCursoPorCursoId(Integer idCurso) {
+
+                List<Integer> idsDocentes = objCursoRepository.findDocenteIdsByCursoId(idCurso);
+                List<DocenteEntity> docentesCursoEntities = objDocenteRepository.findAllById(idsDocentes);
+
+                List<Docente> docentesDominio = docentesCursoEntities.stream()
+                                .map(docenteEntity -> franjaHorariaModelMapper.map(docenteEntity, Docente.class))
+                                .toList();
+
+                List<FranjaHorariaEntity> franjasEntities = objFranjaHorariaRepository
+                                .findByObjCursoId(idCurso);
+
+                System.out.println("---------------Antes del mapeo------------------");
+                List<FranjaHoraria> franjasDominio = this.franjaHorariaModelMapper.map(franjasEntities,
+                                new TypeToken<List<FranjaHoraria>>() {
+                                }.getType());
+                System.out.println("---------------Después del mapeo------------------");
+                franjasDominio.forEach(franja -> franja.setListaDocentes(docentesDominio));
+
+                return franjasDominio;
         }
 }

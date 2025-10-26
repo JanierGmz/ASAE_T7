@@ -5,6 +5,7 @@ import java.util.List;
 import org.mapstruct.Mapper;
 
 import co.edu.unicauca.asae_t7.franjaHoraria.dominio.modelos.FranjaHoraria;
+import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.DTORespuesta.FranjaHorariaDeCursoDTORespuesta;
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.DTOPeticion.FranjaHorariaDTOPeticion;
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.DTORespuesta.FranjaHorariaDTORespuesta;
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.DTORespuesta.FranjaHorariaConDetalleDTORespuesta;
@@ -19,4 +20,6 @@ public interface FranjaHorariaMapperInfraestructuraDominio {
     List<FranjaHorariaDTORespuesta> mappearDeProductosARespuesta(List<FranjaHoraria> franjaHorarias);
 
     List<FranjaHorariaConDetalleDTORespuesta> mappearDeFranjasHorariasConDetalleARespuesta(List<FranjaHoraria> franjaHorarias);
+
+    List<FranjaHorariaDeCursoDTORespuesta> mappearDeFranjasHorariasDeCursoARespuesta(List<FranjaHoraria> franjaHorarias);
 }

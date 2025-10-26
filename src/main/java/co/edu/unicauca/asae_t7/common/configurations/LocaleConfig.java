@@ -12,7 +12,7 @@ import java.util.Locale;
 
 @Configuration
 public class LocaleConfig {
-    
+
     @Bean
     public LocaleResolver localeResolver() {
         AcceptHeaderLocaleResolver resolver = new AcceptHeaderLocaleResolver();
