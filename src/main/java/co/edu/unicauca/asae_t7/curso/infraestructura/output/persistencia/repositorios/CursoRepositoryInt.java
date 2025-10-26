@@ -19,7 +19,7 @@ public interface CursoRepositoryInt extends JpaRepository<CursoEntity, Integer> 
      * @param nombreAsignatura
      * @return
      */
-    List<Curso> findByObjAsignaturaNombre(String nombreAsignatura);
+    List<CursoEntity> findByObjAsignaturaNombre(@Param("nombreAsignatura") String nombreAsignatura);
 
     @Query("select d.id from CursoEntity c join c.docentes d where c.id = :idCurso")
     List<Integer> findDocenteIdsByCursoId(@Param("idCurso") Integer idCurso);

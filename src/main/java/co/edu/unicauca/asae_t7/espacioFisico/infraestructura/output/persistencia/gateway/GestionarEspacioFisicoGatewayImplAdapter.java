@@ -22,6 +22,7 @@ public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspaci
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<EspacioFisico> listarPorNombreYCapacidadEspaciosFisicos(String nombre,
             Integer capacidad) {
         Iterable<EspacioFisicoEntity> lista= this.objEspacioFisicoRepository.findByNombreStartingWithIgnoreCaseAndCapacidadGreaterThanEqualOrderByNombreAsc(nombre, capacidad);
@@ -36,6 +37,7 @@ public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspaci
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existeEspacioFisico(Integer id) {
         return objEspacioFisicoRepository.existsById(id);
     }

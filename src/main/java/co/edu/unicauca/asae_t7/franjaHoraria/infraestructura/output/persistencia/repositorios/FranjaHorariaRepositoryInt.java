@@ -74,6 +74,6 @@ public interface FranjaHorariaRepositoryInt extends JpaRepository<FranjaHorariaE
 	 * @return
 	 */
 	@Modifying
-	@Query(value = "DELETE FROM FranjasHorarias WHERE idCurso = :idCurso", nativeQuery = true)
+	@Query(value = "DELETE FROM FranjaHorariaEntity f WHERE f.objCurso.id = :idCurso")
 	Integer deleteFranjasByCursoId(@Param("idCurso") Integer idCurso);
 }

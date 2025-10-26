@@ -32,4 +32,9 @@ public class GestionarCursoCUAdapter implements GestionarCursoCUIntPort{
         List<Curso> listaCursos = objGestionarProductoGateway.listar();
         return listaCursos;
     }
+
+    @Override
+    public List<Curso> buscarCursosPorAsignatura(String nombreAsignatura){
+        return objGestionarProductoGateway.buscarCursosPorAsignatura(nombreAsignatura);
+    }
 }

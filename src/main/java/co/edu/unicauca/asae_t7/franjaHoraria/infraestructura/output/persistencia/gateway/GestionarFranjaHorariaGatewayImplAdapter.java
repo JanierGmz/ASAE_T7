@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.modelmapper.TypeToken;
 import co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.entidades.CursoEntity;
 import co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.repositorios.CursoRepositoryInt;
 import co.edu.unicauca.asae_t7.docente.infraestructura.output.persistencia.repositorios.DocenteRepositoryInt;
@@ -63,37 +64,44 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
         }
 
         @Override
+        @Transactional(readOnly = true)
         public boolean espacioOcupado(String dia, LocalTime horaInicio, LocalTime horaFin, Integer idEspacioFisico) {
                 return this.objFranjaHorariaRepository.existeOcupacionEnHorario(dia, horaInicio, horaFin,
                                 idEspacioFisico);
         }
 
         @Override
+        @Transactional(readOnly = true)
         public Integer docenteOcupado(String dia, LocalTime horaInicio, LocalTime horaFin, Integer idDocente) {
                 return this.objFranjaHorariaRepository.docenteOcupadoEnHorario(dia, horaInicio, horaFin, idDocente);
         }
 
         @Override
+        @Transactional(readOnly = true)
         public boolean existeEspacioFisico(Integer idEspacioFisico) {
                 return this.objEspacioFisicoRepository.existsById(idEspacioFisico);
         }
 
         @Override
+        @Transactional(readOnly = true)
         public boolean existeDocente(Integer idDocente) {
                 return this.objDocenteRepository.existsById(idDocente);
         }
 
         @Override
+        @Transactional(readOnly = true)
         public boolean existeCurso(Integer idCurso) {
                 return this.objCursoRepository.existsById(idCurso);
         }
 
         @Override
+        @Transactional(readOnly = true)
         public List<Integer> obtenerDocenteIdsPorCurso(Integer idCurso) {
                 return this.objCursoRepository.findDocenteIdsByCursoId(idCurso);
         }
 
         @Override
+        @Transactional(readOnly = true)
         public List<FranjaHoraria> findByObjCursoId(Integer idCurso) {
                 List<FranjaHorariaEntity> entities = objFranjaHorariaRepository.findByObjCursoId(idCurso);
                 return entities.stream()
@@ -102,4 +110,18 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
         }
         
 
+        @Override
+        @Transactional(readOnly = true)
+        public List<FranjaHoraria> buscarFranjasHorariasPorCursoId(Integer idCurso) {
+                Iterable<FranjaHorariaEntity> listaFranjasHorariasEntity = this.objFranjaHorariaRepository.findFranjasYEspacioPorCursoId(idCurso);
+                List<FranjaHoraria> listaFranjasHorarias = this.franjaHorariaModelMapper.map(listaFranjasHorariasEntity, new TypeToken<List<FranjaHoraria>>() {
+                }.getType());
+                return listaFranjasHorarias;
+        }
+
+        @Override
+        @Transactional
+        public boolean eliminarFranjasHorariasPorCursoId(Integer idCurso) {
+                return this.objFranjaHorariaRepository.deleteFranjasByCursoId(idCurso) > 0;
+        }
 }

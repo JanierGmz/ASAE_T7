@@ -22,4 +22,9 @@ public interface GestionarFranjaHorariaGatewayIntPort {
     public List<Integer> obtenerDocenteIdsPorCurso(Integer idCurso);
 
     public List<FranjaHoraria> findByObjCursoId(Integer idCurso);
+
+    public List<FranjaHoraria> buscarFranjasHorariasPorCursoId(Integer idCurso);
+
+    public boolean eliminarFranjasHorariasPorCursoId(Integer idCurso);
+
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;    
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import co.edu.unicauca.asae_t7.franjaHoraria.aplicacion.input.GestionarFranjaHorariaCUIntPort;
 import co.edu.unicauca.asae_t7.franjaHoraria.dominio.modelos.FranjaHoraria;
@@ -18,6 +20,9 @@ import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGes
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.mappers.FranjaHorariaMapperInfraestructuraDominio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import java.util.List;
+import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.DTORespuesta.FranjaHorariaConDetalleDTORespuesta;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/franjas-horarias")
@@ -44,5 +49,21 @@ public class FranjaHorariaRestController {
                 objMapeador.mappearDeProductosARespuesta(this.objGestionarFranjaHorariaCUInt.obtenerPorCursoId(idCurso)),
                 HttpStatus.OK);
         return objRespuesta;
+    }
+
+    @GetMapping("/curso/{idCurso}")
+    public ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>> buscarFranjasHorariasPorCursoId(@PathVariable Integer idCurso) {
+        ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>>(
+            objMapeador.mappearDeFranjasHorariasConDetalleARespuesta(this.objGestionarFranjaHorariaCUInt.buscarFranjasHorariasPorCursoId(idCurso)),
+            HttpStatus.OK
+        );
+        return objRespuesta;
+    }
+
+    @DeleteMapping("/curso/{idCurso}")
+    public ResponseEntity<Boolean> eliminarFranjasHorariasPorCursoId(@PathVariable Integer idCurso) {
+        boolean eliminado = this.objGestionarFranjaHorariaCUInt.eliminarFranjasHorariasPorCursoId(idCurso);
+        ResponseEntity<Boolean> response = new ResponseEntity<Boolean>(eliminado, HttpStatus.NO_CONTENT);
+        return response;
     }
 }

@@ -68,14 +68,10 @@ public class RestApiExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Error> handleValidationExceptions(MethodArgumentNotValidException ex, HttpServletRequest request) {
-        System.out.println("Retornando respuesta con los errores identificados");
-        
-        // Buscar si hay errores de capacidad de espacio físico
         boolean hayErrorCapacidad = ex.getBindingResult().getAllErrors().stream()
                 .anyMatch(error -> error.getCode().equals("CapacidadEspacioFisico"));
         
         if (hayErrorCapacidad) {
-            // Si hay error de capacidad, usar el código específico
             final Error error = ErrorUtils
                     .crearError(CodigoError.CAPACIDAD_INSUFICIENTE.getCodigo(),
                             CodigoError.CAPACIDAD_INSUFICIENTE.getLlaveMensaje(),
@@ -83,7 +79,6 @@ public class RestApiExceptionHandler {
                     .setUrl(request.getRequestURL().toString()).setMetodo(request.getMethod());
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         } else {
-            // Para otros errores de validación, usar el código genérico
             final Error error = ErrorUtils
                     .crearError(CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getCodigo(),
                             "Error de validación: " + ex.getBindingResult().getAllErrors().get(0).getDefaultMessage(),
