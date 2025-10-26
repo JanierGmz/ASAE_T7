@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,6 +27,14 @@ public class CursoRestController {
     public ResponseEntity<List<CursoDTORespuesta>> listar() {
         ResponseEntity<List<CursoDTORespuesta>> objRespuesta = new ResponseEntity<List<CursoDTORespuesta>>(
             objMapeador.mappearDeCursosARespuesta(this.objGestionarCursoCUInt.listar()), 
+            HttpStatus.OK);
+        return objRespuesta;
+    }
+
+    @GetMapping("/cursos/asignatura")
+    public ResponseEntity<List<CursoDTORespuesta>> buscarCursosPorAsignatura(@RequestParam String nombreAsignatura) {
+        ResponseEntity<List<CursoDTORespuesta>> objRespuesta = new ResponseEntity<List<CursoDTORespuesta>>(
+            objMapeador.mappearDeCursosARespuesta(this.objGestionarCursoCUInt.buscarCursosPorAsignatura(nombreAsignatura)), 
             HttpStatus.OK);
         return objRespuesta;
     }

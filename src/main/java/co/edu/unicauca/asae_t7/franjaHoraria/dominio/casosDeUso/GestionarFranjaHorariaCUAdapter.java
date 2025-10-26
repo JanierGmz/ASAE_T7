@@ -1,5 +1,6 @@
 package co.edu.unicauca.asae_t7.franjaHoraria.dominio.casosDeUso;
 
+import java.util.List;
 
 import co.edu.unicauca.asae_t7.common.aplicacion.output.FormateadorResultadosIntPort;
 import co.edu.unicauca.asae_t7.franjaHoraria.aplicacion.input.GestionarFranjaHorariaCUIntPort;
@@ -36,6 +37,16 @@ public class GestionarFranjaHorariaCUAdapter  implements GestionarFranjaHorariaC
             return null; // No continuar con el guardado si la validación falla
         }
         return this.objGestionarFranjaHorariaGateway.guardar(objFranjaHoraria);
+    }
+
+    @Override
+    public List<FranjaHoraria> buscarFranjasHorariasPorCursoId(Integer idCurso) {
+        return this.objGestionarFranjaHorariaGateway.buscarFranjasHorariasPorCursoId(idCurso);
+    }
+
+    @Override
+    public boolean eliminarFranjasHorariasPorCursoId(Integer idCurso) {
+        return this.objGestionarFranjaHorariaGateway.eliminarFranjasHorariasPorCursoId(idCurso);
     }
 
 }

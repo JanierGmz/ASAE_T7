@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.modelmapper.TypeToken;
 import co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.entidades.CursoEntity;
 import co.edu.unicauca.asae_t7.curso.infraestructura.output.persistencia.repositorios.CursoRepositoryInt;
 import co.edu.unicauca.asae_t7.docente.infraestructura.output.persistencia.repositorios.DocenteRepositoryInt;
@@ -92,6 +93,18 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
         public List<Integer> obtenerDocenteIdsPorCurso(Integer idCurso) {
                 return this.objCursoRepository.findDocenteIdsByCursoId(idCurso);
         }
-        
 
+        @Override
+        public List<FranjaHoraria> buscarFranjasHorariasPorCursoId(Integer idCurso) {
+                Iterable<FranjaHorariaEntity> listaFranjasHorariasEntity = this.objFranjaHorariaRepository.findFranjasYEspacioPorCursoId(idCurso);
+                List<FranjaHoraria> listaFranjasHorarias = this.franjaHorariaModelMapper.map(listaFranjasHorariasEntity, new TypeToken<List<FranjaHoraria>>() {
+                }.getType());
+                return listaFranjasHorarias;
+        }
+
+        @Override
+        @Transactional
+        public boolean eliminarFranjasHorariasPorCursoId(Integer idCurso) {
+                return this.objFranjaHorariaRepository.deleteFranjasByCursoId(idCurso) > 0;
+        }
 }

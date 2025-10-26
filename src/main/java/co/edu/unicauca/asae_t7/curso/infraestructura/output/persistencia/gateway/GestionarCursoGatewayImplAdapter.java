@@ -44,4 +44,13 @@ public class GestionarCursoGatewayImplAdapter implements GestionarCursoGatewayIn
         }.getType());
         return listaObtenida;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Curso> buscarCursosPorAsignatura(String nombreAsignatura){
+        Iterable<CursoEntity> listaCursosEntity = this.objCursoRepository.findByObjAsignaturaNombre(nombreAsignatura);
+        List<Curso> listaCursos = this.cursoModelMapper.map(listaCursosEntity, new TypeToken<List<Curso>>() {
+        }.getType());
+        return listaCursos;
+    }
 }
