@@ -9,6 +9,8 @@ import co.edu.unicauca.asae_t7.espacioFisico.aplicacion.output.GestionarEspacioF
 import co.edu.unicauca.asae_t7.espacioFisico.dominio.modelos.EspacioFisico;
 import co.edu.unicauca.asae_t7.espacioFisico.infraestructura.output.persistencia.entidades.EspacioFisicoEntity;
 import co.edu.unicauca.asae_t7.espacioFisico.infraestructura.output.persistencia.repositorios.EspacioFisicoRepositoryInt;
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
 public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspacioFisicoGatewayIntPort {
     private final EspacioFisicoRepositoryInt objEspacioFisicoRepository;
@@ -28,6 +30,7 @@ public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspaci
     }
 
     @Override
+    @Transactional
     public int actualizarEstadoPorId(Integer id, Boolean estado) {
         return objEspacioFisicoRepository.actualizarEstadoPorId(id, estado);
     }

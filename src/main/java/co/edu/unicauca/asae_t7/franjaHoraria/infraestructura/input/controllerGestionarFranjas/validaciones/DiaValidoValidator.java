@@ -8,7 +8,7 @@ import java.util.Set;
 public class DiaValidoValidator implements ConstraintValidator<DiaValido, String> {
 
     private static final Set<String> DIAS_VALIDOS = Set.of(
-        "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"
+        "LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO"
     );
 
     @Override

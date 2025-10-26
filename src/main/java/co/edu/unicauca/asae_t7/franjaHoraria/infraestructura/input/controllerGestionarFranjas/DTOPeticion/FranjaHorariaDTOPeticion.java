@@ -3,6 +3,7 @@ package co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGe
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.validaciones.CapacidadEspacioFisico;
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.validaciones.DiaValido;
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.validaciones.HoraMilitar;
+import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.validaciones.HorarioValido;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @CapacidadEspacioFisico
+@HorarioValido
 public class FranjaHorariaDTOPeticion {
 
     @NotBlank(message = "{franjaHoraria.dia.notBlank}")

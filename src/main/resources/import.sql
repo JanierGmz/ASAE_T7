@@ -44,9 +44,9 @@ INSERT INTO cursos (id, nombre, idAsignatura, cantidadEstudiantesMatriculados) V
 INSERT INTO cursos (id, nombre, idAsignatura, cantidadEstudiantesMatriculados) VALUES (5, 'Bases de Datos I - Grupo A', 4, 35);
 
 -- Franjas Horarias
-INSERT INTO franjashorarias (id, dia, horaInicio, horaFin, idEspacioFisico, idCurso) VALUES (1, 'Lunes', '09:00:00', '11:00:00', 2, 1);
-INSERT INTO franjashorarias (id, dia, horaInicio, horaFin, idEspacioFisico, idCurso) VALUES (2, 'Martes', '09:00:00', '11:00:00', 4, 2);
-INSERT INTO franjashorarias (id, dia, horaInicio, horaFin, idEspacioFisico, idCurso) VALUES (3, 'Lunes', '11:00:00', '13:00:00', 3, 3);
+INSERT INTO franjashorarias (id, dia, horaInicio, horaFin, idEspacioFisico, idCurso) VALUES (1, 'LUNES', '09:00:00', '11:00:00', 2, 1);
+INSERT INTO franjashorarias (id, dia, horaInicio, horaFin, idEspacioFisico, idCurso) VALUES (2, 'MARTES', '09:00:00', '11:00:00', 4, 2);
+INSERT INTO franjashorarias (id, dia, horaInicio, horaFin, idEspacioFisico, idCurso) VALUES (3, 'LUNES', '11:00:00', '13:00:00', 3, 3);
 
 -- Relación Docente-Curso (tabla intermedia DocenteCurso)
 INSERT INTO cursodocente (idDocente, idCurso) VALUES (1, 1);
