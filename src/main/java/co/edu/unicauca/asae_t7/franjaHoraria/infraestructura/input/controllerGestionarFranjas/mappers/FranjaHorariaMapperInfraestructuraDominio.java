@@ -19,4 +19,6 @@ public interface FranjaHorariaMapperInfraestructuraDominio {
     List<FranjaHorariaDTORespuesta> mappearDeProductosARespuesta(List<FranjaHoraria> franjaHorarias);
 
     List<FranjaHorariaConDetalleDTORespuesta> mappearDeFranjasHorariasConDetalleARespuesta(List<FranjaHoraria> franjaHorarias);
+
+    List<FranjaHorariaConDetalleDTORespuesta> mappearDeFranjasHorariasPorDocenteARespuesta(List<FranjaHoraria> franjaHorarias);
 }

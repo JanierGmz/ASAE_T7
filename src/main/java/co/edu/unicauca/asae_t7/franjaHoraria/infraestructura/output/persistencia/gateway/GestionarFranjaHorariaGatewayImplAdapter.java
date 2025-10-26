@@ -107,4 +107,12 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
         public boolean eliminarFranjasHorariasPorCursoId(Integer idCurso) {
                 return this.objFranjaHorariaRepository.deleteFranjasByCursoId(idCurso) > 0;
         }
+
+        @Override
+        public List<FranjaHoraria> buscarFranjasHorariasPorDocenteId(Integer idDocente) {
+                Iterable<FranjaHorariaEntity> listaFranjasHorariasEntity = this.objFranjaHorariaRepository.findFranjasByDocenteIdWithEagerFetch(idDocente);
+                List<FranjaHoraria> listaFranjasHorarias = this.franjaHorariaModelMapper.map(listaFranjasHorariasEntity, new TypeToken<List<FranjaHoraria>>() {
+                }.getType());
+                return listaFranjasHorarias;
+        }
 }

@@ -17,9 +17,6 @@ public class FranjaHorariaConDetalleDTORespuesta {
     private LocalTime horaInicio;
     private LocalTime horaFin;
 
-    private Integer idCurso;
-    private Integer idEspacioFisico;
-
     private CursoDTORespuesta objCurso;
     private EspacioFisicoDTORespuesta objEspacioFisico;
 }

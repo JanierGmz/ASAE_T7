@@ -11,4 +11,6 @@ public interface GestionarFranjaHorariaCUIntPort {
     public List<FranjaHoraria> buscarFranjasHorariasPorCursoId(Integer idCurso);
 
     public boolean eliminarFranjasHorariasPorCursoId(Integer idCurso);
+
+    public List<FranjaHoraria> buscarFranjasHorariasPorDocenteId(Integer idDocente);
 }

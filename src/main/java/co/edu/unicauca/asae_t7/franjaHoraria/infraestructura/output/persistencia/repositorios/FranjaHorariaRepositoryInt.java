@@ -76,4 +76,18 @@ public interface FranjaHorariaRepositoryInt extends JpaRepository<FranjaHorariaE
 	@Modifying
 	@Query(value = "DELETE FROM FranjaHorariaEntity f WHERE f.objCurso.id = :idCurso")
 	Integer deleteFranjasByCursoId(@Param("idCurso") Integer idCurso);
+
+	/**
+ * Buscar franjas horarias de un docente con sus cursos y espacios físicos
+ * usando eager fetching
+ * 
+ * @param idDocente
+ * @return
+ */
+@Query("SELECT DISTINCT f FROM FranjaHorariaEntity f " +
+"JOIN FETCH f.objCurso c " +
+"JOIN FETCH f.objEspacioFisico e " +
+"JOIN c.docentes d " +
+"WHERE d.id = :idDocente")
+List<FranjaHorariaEntity> findFranjasByDocenteIdWithEagerFetch(@Param("idDocente") Integer idDocente);
 }
