@@ -26,4 +26,14 @@ public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspaci
         List<EspacioFisico> listaObtenida= this.espacioFisicoMapper.map(lista,new TypeToken<List<EspacioFisico>>() {}.getType()); 
         return listaObtenida;
     }
+
+    @Override
+    public int actualizarEstadoPorId(Integer id, Boolean estado) {
+        return objEspacioFisicoRepository.actualizarEstadoPorId(id, estado);
+    }
+
+    @Override
+    public boolean existeEspacioFisico(Integer id) {
+        return objEspacioFisicoRepository.existsById(id);
+    }
 }

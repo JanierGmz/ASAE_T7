@@ -92,6 +92,14 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
         public List<Integer> obtenerDocenteIdsPorCurso(Integer idCurso) {
                 return this.objCursoRepository.findDocenteIdsByCursoId(idCurso);
         }
+
+        @Override
+        public List<FranjaHoraria> findByObjCursoId(Integer idCurso) {
+                List<FranjaHorariaEntity> entities = objFranjaHorariaRepository.findByObjCursoId(idCurso);
+                return entities.stream()
+                        .map(entity -> franjaHorariaModelMapper.map(entity, FranjaHoraria.class))
+                        .toList();
+        }
         
 
 }

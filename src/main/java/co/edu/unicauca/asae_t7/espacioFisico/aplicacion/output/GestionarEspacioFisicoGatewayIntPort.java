@@ -7,5 +7,6 @@ import co.edu.unicauca.asae_t7.espacioFisico.dominio.modelos.EspacioFisico;
 public interface GestionarEspacioFisicoGatewayIntPort {
     public List<EspacioFisico> listarPorNombreYCapacidadEspaciosFisicos( String nombre,
             Integer capacidad);
-
+    public int actualizarEstadoPorId(Integer id, Boolean estado);
+    public boolean existeEspacioFisico(Integer id);
 }

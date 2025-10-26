@@ -20,4 +20,6 @@ public interface GestionarFranjaHorariaGatewayIntPort {
     public boolean existeCurso(Integer idCurso);
 
     public List<Integer> obtenerDocenteIdsPorCurso(Integer idCurso);
+
+    public List<FranjaHoraria> findByObjCursoId(Integer idCurso);
 }

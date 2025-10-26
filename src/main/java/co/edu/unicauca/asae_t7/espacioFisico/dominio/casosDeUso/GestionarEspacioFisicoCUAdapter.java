@@ -3,7 +3,6 @@ package co.edu.unicauca.asae_t7.espacioFisico.dominio.casosDeUso;
 import java.util.List;
 
 import co.edu.unicauca.asae_t7.common.aplicacion.output.FormateadorResultadosIntPort;
-import co.edu.unicauca.asae_t7.curso.dominio.modelos.Curso;
 import co.edu.unicauca.asae_t7.espacioFisico.aplicacion.input.GestionarEspacioFisicoCUIntPort;
 import co.edu.unicauca.asae_t7.espacioFisico.aplicacion.output.GestionarEspacioFisicoGatewayIntPort;
 import co.edu.unicauca.asae_t7.espacioFisico.dominio.modelos.EspacioFisico;
@@ -23,9 +22,18 @@ public class GestionarEspacioFisicoCUAdapter implements GestionarEspacioFisicoCU
         List<EspacioFisico> listaEspacios = objGestionarEspacioFisicoGateway.listarPorNombreYCapacidadEspaciosFisicos(nombre, capacidad);
         return listaEspacios;
     }
+    @Override
+    public boolean actualizarEstadoPorId(Integer id, Boolean estado) {
+        if (!objGestionarEspacioFisicoGateway.existeEspacioFisico(id)) {
+            this.objEspacioFisicoFormateadorResultados.retornarRespuestaErrorEntidadNoExiste("Error: El ID del espacio físico no existe.");
+            return false;
+        }
+        Integer  resultado = objGestionarEspacioFisicoGateway.actualizarEstadoPorId(id, estado);
+        return resultado > 0;
+    }
 }
 
- 
-    
+
+
 
 

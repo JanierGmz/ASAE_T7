@@ -7,6 +7,8 @@ import co.edu.unicauca.asae_t7.franjaHoraria.aplicacion.output.GestionarFranjaHo
 import co.edu.unicauca.asae_t7.franjaHoraria.dominio.chainResponsibility.handlers.ValidacionChain;
 import co.edu.unicauca.asae_t7.franjaHoraria.dominio.modelos.FranjaHoraria;
 
+import java.util.List;
+
 public class GestionarFranjaHorariaCUAdapter  implements GestionarFranjaHorariaCUIntPort{
 
     private final GestionarFranjaHorariaGatewayIntPort objGestionarFranjaHorariaGateway;
@@ -38,4 +40,8 @@ public class GestionarFranjaHorariaCUAdapter  implements GestionarFranjaHorariaC
         return this.objGestionarFranjaHorariaGateway.guardar(objFranjaHoraria);
     }
 
+    @Override
+    public List<FranjaHoraria> obtenerPorCursoId(Integer idCurso) {
+        return this.objGestionarFranjaHorariaGateway.findByObjCursoId(idCurso);
+    }
 }

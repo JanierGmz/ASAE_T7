@@ -1,7 +1,11 @@
 package co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.controladores;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +35,14 @@ public class FranjaHorariaRestController {
             objMapeador.mappearDeFranjaHorariaARespuesta(objFranjaCreada),
             HttpStatus.CREATED
         );
+        return objRespuesta;
+    }
+
+    @GetMapping("/{idCurso}")
+    public ResponseEntity<List<FranjaHorariaDTORespuesta>> obtenerPorCursoId(@PathVariable Integer idCurso) {
+        ResponseEntity<List<FranjaHorariaDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaDTORespuesta>>(
+                objMapeador.mappearDeProductosARespuesta(this.objGestionarFranjaHorariaCUInt.obtenerPorCursoId(idCurso)),
+                HttpStatus.OK);
         return objRespuesta;
     }
 }
