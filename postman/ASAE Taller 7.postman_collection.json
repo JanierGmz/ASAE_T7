@@ -139,6 +139,40 @@
 					"response": []
 				},
 				{
+					"name": "1.1 Crear Docente con Correo Existente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"Carlos Andrés\",\r\n  \"apellidos\": \"Ramírez Gómez\",\r\n  \"correo\": \"carlosramirez@unicauca.edu.co\",\r\n  \"objOficina\": {\r\n    \"nombre\": \"Oficina de Ingeniería de Sistemas\",\r\n    \"ubicacion\": \"Edificio 2, segundo piso, bloque B\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/docentes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"docentes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "2 Crear Franja Correcta",
 					"request": {
 						"method": "POST",
@@ -766,15 +800,35 @@
 					"response": []
 				},
 				{
-					"name": "3 Listar franja horaria por docente",
+					"name": "3 Listar franja horaria por docente (EAGER)",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/franjas-horarias/docente/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"franjas-horarias",
+								"docente",
+								"1"
+							]
+						}
 					},
 					"response": []
 				},
 				{
-					"name": "4 Listar franja horaria por curso (Sin detalle)",
+					"name": "4 Listar franja horaria por curso (Lazy)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -790,6 +844,35 @@
 								"franjas-horarias",
 								"curso-sin-detalle",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5 Listar Espacios fisicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/espaciosFisicos?nombre=au&capacidad=25",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"espaciosFisicos"
+							],
+							"query": [
+								{
+									"key": "nombre",
+									"value": "au"
+								},
+								{
+									"key": "capacidad",
+									"value": "25"
+								}
 							]
 						}
 					},
@@ -846,35 +929,6 @@
 								"franjas-horarias",
 								"curso",
 								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "5 Listar Espacios fisicos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/api/espaciosFisicos?nombre=au&capacidad=25",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"espaciosFisicos"
-							],
-							"query": [
-								{
-									"key": "nombre",
-									"value": "au"
-								},
-								{
-									"key": "capacidad",
-									"value": "25"
-								}
 							]
 						}
 					},
