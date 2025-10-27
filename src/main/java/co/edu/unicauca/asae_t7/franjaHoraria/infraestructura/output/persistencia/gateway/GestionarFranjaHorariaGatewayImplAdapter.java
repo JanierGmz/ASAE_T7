@@ -153,4 +153,15 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
 
                 return franjasDominio;
         }
+
+        @Override
+        @Transactional(readOnly = true)
+        public List<FranjaHoraria> buscarFranjasHorariasPorDocenteId(Integer idDocente) {
+                Iterable<FranjaHorariaEntity> listaFranjasHorariasEntity = this.objFranjaHorariaRepository
+                                .findFranjasByDocenteIdWithEagerFetch(idDocente);
+                List<FranjaHoraria> listaFranjasHorarias = this.franjaHorariaModelMapper.map(listaFranjasHorariasEntity,
+                                new TypeToken<List<FranjaHoraria>>() {
+                                }.getType());
+                return listaFranjasHorarias;
+        }
 }

@@ -75,4 +75,15 @@ public class FranjaHorariaRestController {
                 HttpStatus.OK);
         return objRespuesta;
     }
+
+    @GetMapping("/docente/{idDocente}")
+    public ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>> buscarFranjasHorariasPorDocenteId(
+            @PathVariable Integer idDocente) {
+        ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>>(
+                objMapeador.mappearDeFranjasHorariasPorDocenteARespuesta(
+                        this.objGestionarFranjaHorariaCUInt.buscarFranjasHorariasPorDocenteId(idDocente)),
+                HttpStatus.OK);
+
+        return objRespuesta;
+    }
 }

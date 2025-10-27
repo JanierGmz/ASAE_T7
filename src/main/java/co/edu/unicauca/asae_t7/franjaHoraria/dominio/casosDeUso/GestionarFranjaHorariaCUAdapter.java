@@ -54,4 +54,9 @@ public class GestionarFranjaHorariaCUAdapter implements GestionarFranjaHorariaCU
     public List<FranjaHoraria> buscarFranjasSinCursoPorCursoId(Integer idCurso) {
         return this.objGestionarFranjaHorariaGateway.buscarFranjasSinCursoPorCursoId(idCurso);
     }
+
+    @Override
+    public List<FranjaHoraria> buscarFranjasHorariasPorDocenteId(Integer idDocente) {
+        return this.objGestionarFranjaHorariaGateway.buscarFranjasHorariasPorDocenteId(idDocente);
+    }
 }
