@@ -19,71 +19,120 @@ import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGes
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.DTORespuesta.FranjaHorariaDTORespuesta;
 import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.mappers.FranjaHorariaMapperInfraestructuraDominio;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
-import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.DTORespuesta.FranjaHorariaConDetalleDTORespuesta;
+import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.input.controllerGestionarFranjas.DTORespuesta.FranjaHorariaDeDocenteDTORespuesta;
 
 @RestController
 @RequestMapping("/api/franjas-horarias")
 @RequiredArgsConstructor
 public class FranjaHorariaRestController {
 
-    private final GestionarFranjaHorariaCUIntPort objGestionarFranjaHorariaCUInt;
-    private final FranjaHorariaMapperInfraestructuraDominio objMapeador;
+        private final GestionarFranjaHorariaCUIntPort objGestionarFranjaHorariaCUInt;
+        private final FranjaHorariaMapperInfraestructuraDominio objMapeador;
 
-    @PostMapping
-    public ResponseEntity<FranjaHorariaDTORespuesta> create(@RequestBody @Valid FranjaHorariaDTOPeticion objPeticion) {
-        FranjaHoraria objFranjaCrear = objMapeador.mappearDePeticionAFranjaHoraria(objPeticion);
-        FranjaHoraria objFranjaCreada = objGestionarFranjaHorariaCUInt.crear(objFranjaCrear);
-        ResponseEntity<FranjaHorariaDTORespuesta> objRespuesta = new ResponseEntity<FranjaHorariaDTORespuesta>(
-                objMapeador.mappearDeFranjaHorariaARespuesta(objFranjaCreada),
-                HttpStatus.CREATED);
-        return objRespuesta;
-    }
+        /**
+         * Endpoint para crear una nueva franja horaria
+         * 
+         * @param objPeticion
+         * @return
+         */
+        @PostMapping
+        public ResponseEntity<FranjaHorariaDTORespuesta> create(
+                        @RequestBody @Valid FranjaHorariaDTOPeticion objPeticion) {
+                FranjaHoraria objFranjaCrear = objMapeador.mappearDePeticionAFranjaHoraria(objPeticion);
+                FranjaHoraria objFranjaCreada = objGestionarFranjaHorariaCUInt.crear(objFranjaCrear);
+                ResponseEntity<FranjaHorariaDTORespuesta> objRespuesta = new ResponseEntity<FranjaHorariaDTORespuesta>(
+                                objMapeador.mappearDeFranjaHorariaARespuesta(objFranjaCreada),
+                                HttpStatus.CREATED);
+                return objRespuesta;
+        }
 
-    @GetMapping("/{idCurso}")
-    public ResponseEntity<List<FranjaHorariaDTORespuesta>> obtenerPorCursoId(@PathVariable Integer idCurso) {
-        ResponseEntity<List<FranjaHorariaDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaDTORespuesta>>(
-                objMapeador
-                        .mappearDeProductosARespuesta(this.objGestionarFranjaHorariaCUInt.obtenerPorCursoId(idCurso)),
-                HttpStatus.OK);
-        return objRespuesta;
-    }
+        /**
+         * Endpoint para obtener franjas horarias por ID de curso
+         * 
+         * @param idCurso
+         * @return
+         */
+        @Valid
+        @GetMapping("/{idCurso}")
+        public ResponseEntity<List<FranjaHorariaDTORespuesta>> obtenerPorCursoId(
+                        @PathVariable @Min(value = 1, message = "{franjaHoraria.curso.id.min}") Integer idCurso) {
+                ResponseEntity<List<FranjaHorariaDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaDTORespuesta>>(
+                                objMapeador
+                                                .mappearDeProductosARespuesta(this.objGestionarFranjaHorariaCUInt
+                                                                .obtenerPorCursoId(idCurso)),
+                                HttpStatus.OK);
+                return objRespuesta;
+        }
 
-    @GetMapping("/curso/{idCurso}")
-    public ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>> buscarFranjasHorariasPorCursoId(
-            @PathVariable Integer idCurso) {
-        ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>>(
-                objMapeador.mappearDeFranjasHorariasConDetalleARespuesta(
-                        this.objGestionarFranjaHorariaCUInt.buscarFranjasHorariasPorCursoId(idCurso)),
-                HttpStatus.OK);
-        return objRespuesta;
-    }
+        /**
+         * Endpoint para buscar franjas horarias por ID de curso
+         * 
+         * @param idCurso
+         * @return
+         */
+        @Valid
+        @GetMapping("/curso/{idCurso}")
+        public ResponseEntity<List<FranjaHorariaDeDocenteDTORespuesta>> buscarFranjasHorariasPorCursoId(
+                        @PathVariable @Min(value = 1, message = "{franjaHoraria.curso.id.min}") Integer idCurso) {
+                ResponseEntity<List<FranjaHorariaDeDocenteDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaDeDocenteDTORespuesta>>(
+                                objMapeador.mappearDeFranjasHorariasDeDocenteARespuesta(
+                                                this.objGestionarFranjaHorariaCUInt
+                                                                .buscarFranjasHorariasPorCursoId(idCurso)),
+                                HttpStatus.OK);
+                return objRespuesta;
+        }
 
-    @DeleteMapping("/curso/{idCurso}")
-    public ResponseEntity<Boolean> eliminarFranjasHorariasPorCursoId(@PathVariable Integer idCurso) {
-        boolean eliminado = this.objGestionarFranjaHorariaCUInt.eliminarFranjasHorariasPorCursoId(idCurso);
-        ResponseEntity<Boolean> response = new ResponseEntity<Boolean>(eliminado, HttpStatus.NO_CONTENT);
-        return response;
-    }
+        /**
+         * Endpoint para eliminar franjas horarias por ID de curso
+         * 
+         * @param idCurso
+         * @return
+         */
+        @Valid
+        @DeleteMapping("/curso/{idCurso}")
+        public ResponseEntity<Boolean> eliminarFranjasHorariasPorCursoId(
+                        @PathVariable @Min(value = 1, message = "{franjaHoraria.curso.id.min}") Integer idCurso) {
+                boolean eliminado = this.objGestionarFranjaHorariaCUInt.eliminarFranjasHorariasPorCursoId(idCurso);
+                ResponseEntity<Boolean> response = new ResponseEntity<Boolean>(eliminado, HttpStatus.NO_CONTENT);
+                return response;
+        }
 
-    @GetMapping("/curso-sin-detalle/{idCurso}")
-    public ResponseEntity<List<FranjaHorariaDeCursoDTORespuesta>> buscarFranjasSinCursoPorCursoId(
-            @PathVariable Integer idCurso) {
-        ResponseEntity<List<FranjaHorariaDeCursoDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaDeCursoDTORespuesta>>(
-                objMapeador.mappearDeFranjasHorariasDeCursoARespuesta(
-                        this.objGestionarFranjaHorariaCUInt.buscarFranjasSinCursoPorCursoId(idCurso)),
-                HttpStatus.OK);
-        return objRespuesta;
-    }
+        /**
+         * Endpoint para buscar franjas sin curso por ID de curso
+         * 
+         * @param idCurso
+         * @return
+         */
+        @Valid
+        @GetMapping("/curso-sin-detalle/{idCurso}")
+        public ResponseEntity<List<FranjaHorariaDeCursoDTORespuesta>> buscarFranjasSinCursoPorCursoId(
+                        @PathVariable @Min(value = 1, message = "{franjaHoraria.curso.id.min}") Integer idCurso) {
+                ResponseEntity<List<FranjaHorariaDeCursoDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaDeCursoDTORespuesta>>(
+                                objMapeador.mappearDeFranjasHorariasDeCursoARespuesta(
+                                                this.objGestionarFranjaHorariaCUInt
+                                                                .buscarFranjasSinCursoPorCursoId(idCurso)),
+                                HttpStatus.OK);
+                return objRespuesta;
+        }
 
-    @GetMapping("/docente/{idDocente}")
-    public ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>> buscarFranjasHorariasPorDocenteId(
-            @PathVariable Integer idDocente) {
-        ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaConDetalleDTORespuesta>>(
-                objMapeador.mappearDeFranjasHorariasPorDocenteARespuesta(
-                        this.objGestionarFranjaHorariaCUInt.buscarFranjasHorariasPorDocenteId(idDocente)),
-                HttpStatus.OK);
+        /***
+         * Endpoint para buscar franjas horarias por ID de docente
+         * 
+         * @param idDocente
+         * @return
+         */
+        @Valid
+        @GetMapping("/docente/{idDocente}")
+        public ResponseEntity<List<FranjaHorariaDeDocenteDTORespuesta>> buscarFranjasHorariasPorDocenteId(
+                        @PathVariable @Min(value = 1, message = "{franjaHoraria.docente.id.min}") Integer idDocente) {
+                ResponseEntity<List<FranjaHorariaDeDocenteDTORespuesta>> objRespuesta = new ResponseEntity<List<FranjaHorariaDeDocenteDTORespuesta>>(
+                                objMapeador.mappearDeFranjasHorariasPorDocenteARespuesta(
+                                                this.objGestionarFranjaHorariaCUInt
+                                                                .buscarFranjasHorariasPorDocenteId(idDocente)),
+                                HttpStatus.OK);
 
-        return objRespuesta;
-    }
+                return objRespuesta;
+        }
 }

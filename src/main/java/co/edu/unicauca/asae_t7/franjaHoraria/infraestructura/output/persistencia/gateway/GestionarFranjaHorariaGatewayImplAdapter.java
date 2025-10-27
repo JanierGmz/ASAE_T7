@@ -1,10 +1,11 @@
 package co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.output.persistencia.gateway;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,18 +30,23 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
         private final CursoRepositoryInt objCursoRepository;
         private final EspacioFisicoRepositoryInt objEspacioFisicoRepository;
         private final DocenteRepositoryInt objDocenteRepository;
-        private final ModelMapper franjaHorariaModelMapper;
+
+        @Autowired
+        @Qualifier("modelMapperPrincipal")
+        private ModelMapper franjaHorariaModelMapper;
+
+        @Autowired
+        @Qualifier("modelMapperSinCurso")
+        private ModelMapper franjaHorariaSinCursoModelMapper;
 
         public GestionarFranjaHorariaGatewayImplAdapter(FranjaHorariaRepositoryInt objFranjaHorariaRepository,
                         CursoRepositoryInt objCursoRepository,
                         EspacioFisicoRepositoryInt objEspacioFisicoRepository,
-                        DocenteRepositoryInt objDocenteRepository,
-                        ModelMapper franjaHorariaModelMapper) {
+                        DocenteRepositoryInt objDocenteRepository) {
                 this.objFranjaHorariaRepository = objFranjaHorariaRepository;
                 this.objCursoRepository = objCursoRepository;
                 this.objEspacioFisicoRepository = objEspacioFisicoRepository;
                 this.objDocenteRepository = objDocenteRepository;
-                this.franjaHorariaModelMapper = franjaHorariaModelMapper;
         }
 
         @Override
@@ -138,14 +144,15 @@ public class GestionarFranjaHorariaGatewayImplAdapter implements GestionarFranja
                 List<DocenteEntity> docentesCursoEntities = objDocenteRepository.findAllById(idsDocentes);
 
                 List<Docente> docentesDominio = docentesCursoEntities.stream()
-                                .map(docenteEntity -> franjaHorariaModelMapper.map(docenteEntity, Docente.class))
+                                .map(docenteEntity -> franjaHorariaSinCursoModelMapper.map(docenteEntity,
+                                                Docente.class))
                                 .toList();
 
                 List<FranjaHorariaEntity> franjasEntities = objFranjaHorariaRepository
                                 .findByObjCursoId(idCurso);
 
                 System.out.println("---------------Antes del mapeo------------------");
-                List<FranjaHoraria> franjasDominio = this.franjaHorariaModelMapper.map(franjasEntities,
+                List<FranjaHoraria> franjasDominio = this.franjaHorariaSinCursoModelMapper.map(franjasEntities,
                                 new TypeToken<List<FranjaHoraria>>() {
                                 }.getType());
                 System.out.println("---------------Después del mapeo------------------");

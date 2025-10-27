@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import co.edu.unicauca.asae_t7.espacioFisico.aplicacion.output.GestionarEspacioFisicoGatewayIntPort;
 import co.edu.unicauca.asae_t7.espacioFisico.dominio.modelos.EspacioFisico;
@@ -14,11 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class GestionarEspacioFisicoGatewayImplAdapter implements GestionarEspacioFisicoGatewayIntPort {
     private final EspacioFisicoRepositoryInt objEspacioFisicoRepository;
-    private final ModelMapper espacioFisicoMapper;
 
-    public GestionarEspacioFisicoGatewayImplAdapter(EspacioFisicoRepositoryInt objEspacioFisicoRepository, ModelMapper espacioFisicoMapper) {
+    @Autowired
+    @Qualifier("modelMapperPrincipal")
+    private ModelMapper espacioFisicoMapper;
+
+    public GestionarEspacioFisicoGatewayImplAdapter(EspacioFisicoRepositoryInt objEspacioFisicoRepository) {
         this.objEspacioFisicoRepository = objEspacioFisicoRepository;
-        this.espacioFisicoMapper = espacioFisicoMapper;
     }
 
     @Override

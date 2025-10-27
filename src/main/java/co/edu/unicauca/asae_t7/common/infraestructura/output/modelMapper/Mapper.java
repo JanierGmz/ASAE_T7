@@ -13,8 +13,14 @@ import co.edu.unicauca.asae_t7.franjaHoraria.infraestructura.output.persistencia
 @Configuration
 public class Mapper {
 
-    @Bean
+    @Bean("modelMapperPrincipal")
     public ModelMapper modelMapper() {
+        ModelMapper objMapper = new ModelMapper();
+        return objMapper;
+    }
+
+    @Bean("modelMapperSinCurso")
+    public ModelMapper modelMapperSinCurso() {
         ModelMapper objMapper = new ModelMapper();
 
         // Configuración para no cargar Cursos en Docentes

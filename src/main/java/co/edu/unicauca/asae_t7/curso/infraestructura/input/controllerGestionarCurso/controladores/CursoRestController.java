@@ -22,6 +22,10 @@ public class CursoRestController {
     private final GestionarCursoCUIntPort objGestionarCursoCUInt;
     private final CursoMapperInfraestructuraDominio objMapeador;
 
+    /**
+     * Endpoint para listar todos los cursos
+     * @return
+     */
     @GetMapping("/cursos")
     public ResponseEntity<List<CursoDTORespuesta>> listar() {
         ResponseEntity<List<CursoDTORespuesta>> objRespuesta = new ResponseEntity<List<CursoDTORespuesta>>(
@@ -30,6 +34,11 @@ public class CursoRestController {
         return objRespuesta;
     }
 
+    /**
+     * Endpoint para buscar cursos por nombre de asignatura
+     * @param nombreAsignatura
+     * @return Lista de cursos que coinciden con el nombre de la asignatura
+     */
     @GetMapping("/cursos/asignatura")
     public ResponseEntity<List<CursoDTORespuesta>> buscarCursosPorAsignatura(@RequestParam String nombreAsignatura) {
         ResponseEntity<List<CursoDTORespuesta>> objRespuesta = new ResponseEntity<List<CursoDTORespuesta>>(

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,11 +17,13 @@ import co.edu.unicauca.asae_t7.curso.dominio.modelos.Curso;
 @Service
 public class GestionarCursoGatewayImplAdapter implements GestionarCursoGatewayIntPort {
     private final CursoRepositoryInt objCursoRepository;
-    private final ModelMapper cursoModelMapper;
 
-    public GestionarCursoGatewayImplAdapter(CursoRepositoryInt objCursoRepository, ModelMapper cursoModelMapper) {
+    @Autowired
+    @Qualifier("modelMapperPrincipal")
+    private ModelMapper cursoModelMapper;
+
+    public GestionarCursoGatewayImplAdapter(CursoRepositoryInt objCursoRepository) {
         this.objCursoRepository = objCursoRepository;
-        this.cursoModelMapper = cursoModelMapper;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class GestionarCursoGatewayImplAdapter implements GestionarCursoGatewayIn
 
     @Override
     @Transactional(readOnly = true)
-    public List<Curso> buscarCursosPorAsignatura(String nombreAsignatura){
+    public List<Curso> buscarCursosPorAsignatura(String nombreAsignatura) {
         Iterable<CursoEntity> listaCursosEntity = this.objCursoRepository.findByObjAsignaturaNombre(nombreAsignatura);
         List<Curso> listaCursos = this.cursoModelMapper.map(listaCursosEntity, new TypeToken<List<Curso>>() {
         }.getType());

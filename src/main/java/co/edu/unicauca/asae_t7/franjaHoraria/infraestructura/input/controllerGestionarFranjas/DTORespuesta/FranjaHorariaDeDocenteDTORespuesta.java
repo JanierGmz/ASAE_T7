@@ -11,7 +11,7 @@ import co.edu.unicauca.asae_t7.espacioFisico.infraestructura.input.controlllerGe
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class FranjaHorariaConDetalleDTORespuesta {
+public class FranjaHorariaDeDocenteDTORespuesta {
     private Integer id;
     private String dia;
     private LocalTime horaInicio;

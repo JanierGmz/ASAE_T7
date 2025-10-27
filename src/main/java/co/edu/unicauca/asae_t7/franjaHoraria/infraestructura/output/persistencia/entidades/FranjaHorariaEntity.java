@@ -35,8 +35,8 @@ public class FranjaHorariaEntity {
     @JoinColumn(name = "idEspacioFisico", nullable = false)
     private EspacioFisicoEntity objEspacioFisico;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    // @ManyToOne(fetch = FetchType.EAGER)
+     @ManyToOne(fetch = FetchType.LAZY)
+    //@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idCurso", nullable = false)
     private CursoEntity objCurso;
 

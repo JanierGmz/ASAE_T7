@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import co.edu.unicauca.asae_t7.espacioFisico.aplicacion.input.GestionarEspacioFisicoCUIntPort;
 import co.edu.unicauca.asae_t7.espacioFisico.infraestructura.input.controlllerGestionarEspacioFisico.DTORespuesta.EspacioFisicoDTORespuesta;
 import co.edu.unicauca.asae_t7.espacioFisico.infraestructura.input.controlllerGestionarEspacioFisico.mappers.EspacioFisicoMapperInfraestructuraDominio;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -29,10 +31,11 @@ public class EspacioFisicoRestController {
      * @param capacidad Capacidad mínima
      * @return Lista de espacios físicos que cumplen con los criterios
      */
+    @Valid
     @GetMapping()
     public ResponseEntity<List<EspacioFisicoDTORespuesta>> listarPorNombreYCapacidadEspaciosFisicos(
             @RequestParam String nombre,
-            @RequestParam Integer capacidad) {
+            @RequestParam @Min(value = 1, message = "{espacioFisico.capacidad.min}") Integer capacidad) {
 
         ResponseEntity<List<EspacioFisicoDTORespuesta>> objRespuesta = new ResponseEntity<List<EspacioFisicoDTORespuesta>>(
                 objMapeador.mappearDeEspaciosFisicosARespuesta(
@@ -49,8 +52,9 @@ public class EspacioFisicoRestController {
      * @param estado Nuevo estado del espacio físico
      * @return Respuesta indicando si la actualización fue exitosa
      */
+    @Valid
     @PatchMapping("/actualizarEstado")
-    public ResponseEntity<Boolean> actualizarEstadoPorId(@RequestParam Integer id, @RequestParam Boolean estado) {
+    public ResponseEntity<Boolean> actualizarEstadoPorId(@RequestParam @Min(value = 1, message = "{espacioFisico.capacidad.min}") Integer id, @RequestParam Boolean estado) {
 
         boolean resultado = objGestionarEspacioFisicoCUInt.actualizarEstadoPorId(id, estado);
         return new ResponseEntity<>(resultado, HttpStatus.OK);

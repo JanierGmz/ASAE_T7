@@ -24,6 +24,11 @@ public class DocenteRestController {
     private final DocenteMapperInfraestructuraDominio objMapeador;
 
 
+    /**
+     * Endpoint para crear un nuevo docente
+     * @param objDocente
+     * @return
+     */
     @PostMapping()
     public ResponseEntity<DocenteDTORespuesta> create(@RequestBody @Valid DocenteDTOPeticion objDocente){
         Docente objDocenteCrear = objMapeador.docentePeticionToDocente(objDocente);

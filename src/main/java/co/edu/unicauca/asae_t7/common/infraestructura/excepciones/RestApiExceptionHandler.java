@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
 import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.error.CodigoError;
 import co.edu.unicauca.asae_t7.common.infraestructura.excepciones.error.Error;
@@ -102,5 +103,26 @@ public class RestApiExceptionHandler {
         ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
                 return new ResponseEntity<>(e.getMessage(),
                                 HttpStatus.BAD_REQUEST);
+        }
+
+        @ExceptionHandler(HandlerMethodValidationException.class)
+        public ResponseEntity<Error> handleHandlerMethodValidationException(
+                        final HttpServletRequest req,
+                        final HandlerMethodValidationException ex) {
+
+                String detalle = ex.getAllValidationResults().get(0).getResolvableErrors().get(0).getDefaultMessage();
+
+                final Error error = ErrorUtils
+                                .crearError(
+                                                CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getCodigo(),
+                                                String.format("%s, %s",
+                                                                CodigoError.VIOLACION_REGLA_DE_NEGOCIO
+                                                                                .getLlaveMensaje(),
+                                                                detalle),
+                                                HttpStatus.BAD_REQUEST.value())
+                                .setUrl(req.getRequestURL().toString())
+                                .setMetodo(req.getMethod());
+
+                return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
 }
